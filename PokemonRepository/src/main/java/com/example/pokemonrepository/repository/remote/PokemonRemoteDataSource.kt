@@ -1,7 +1,7 @@
-package com.example.pokemonrepository.repository
+package com.example.pokemonrepository.repository.remote
 
 import com.example.pokemonrepository.data.PokemonProperty
 
-interface PokemonDataSource {
+interface PokemonRemoteDataSource {
     suspend fun getPokemonList(limit: Int): List<PokemonProperty>
 }

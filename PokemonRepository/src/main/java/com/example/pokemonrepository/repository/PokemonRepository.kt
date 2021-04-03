@@ -1,5 +1,7 @@
 package com.example.pokemonrepository.repository
 
-class PokemonRepository(private val pokemonDataSource: PokemonDataSource)  {
-    suspend fun getPokemonList(limit: Int) = pokemonDataSource.getPokemonList(limit)
+import com.example.pokemonrepository.data.PokemonProperty
+
+interface PokemonRepository {
+    suspend fun getPokemonList(limit: Int): List<PokemonProperty>
 }

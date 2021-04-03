@@ -8,8 +8,6 @@ import dagger.Provides
 @Module
 class PokemonRepositoryUseCaseBusModule  {
     @Provides
-    fun providePokemonRepositoryUseCaseBus(repository: PokemonRepository): PokemonRepositoryUseCaseBus =
-        PokemonRepositoryUseCaseBus(
-            repository
-        )
+    fun providePokemonRepositoryUseCaseBus(repository: PokemonRepository): PokemonRepositoryUseCaseBus
+            = PokemonRepositoryUseCaseBus(repository)
 }

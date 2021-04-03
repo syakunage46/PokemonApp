@@ -2,7 +2,7 @@ package com.example.pokemonrepository.data
 
 data class PokemonProperty (
     val id: Long,
-    val name: String,
+    var name: String,
     val weight: Long,
     val height: Long
 )
