@@ -1,4 +1,4 @@
-package com.example.myapplication.presenter
+package com.example.myapplication.controller
 
 interface SwipeRefreshDelegate {
     fun onSwipeRefresh()

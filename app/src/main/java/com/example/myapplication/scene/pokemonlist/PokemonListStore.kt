@@ -10,11 +10,12 @@ import com.example.myapplication.data.PokemonData
 import com.example.myapplication.di.ApplicationModule
 import com.example.myapplication.di.DaggerPokemonRepositoryComponent
 import com.example.myapplication.gateway.pokemonrepository.PokemonExternalRepositoryGateway
-import com.example.myapplication.presenter.SwipeRefreshDelegate
+import com.example.myapplication.controller.SwipeRefreshDelegate
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class PokemonListStore(val app: Application): AndroidViewModel(app), SwipeRefreshDelegate {
+class PokemonListStore(val app: Application): AndroidViewModel(app),
+    SwipeRefreshDelegate {
     @Inject
     lateinit var repositoryGateway: PokemonExternalRepositoryGateway
 
