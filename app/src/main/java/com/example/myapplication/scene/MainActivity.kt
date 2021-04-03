@@ -1,11 +1,10 @@
-package com.example.myapplication
+package com.example.myapplication.scene
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.example.pokemonrepository.PokemonRepositoryGateway
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.example.myapplication.MainActivityViewModel
+import com.example.myapplication.R
 
 class MainActivity : AppCompatActivity() {
     val viewModel: MainActivityViewModel by viewModels()

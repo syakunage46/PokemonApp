@@ -3,7 +3,7 @@ package com.example.pokemonrepository.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.pokemonrepository.data.PokemonProperty
+import com.example.pokemonrepository.data.PokemonRepositoryItem
 
 @Entity(tableName = "pokemon")
 data class PokemonEntity(
@@ -18,7 +18,7 @@ data class PokemonEntity(
     @ColumnInfo(name = "front_image_url")
     val frontImageUrl: String,
 ) {
-    fun toPokemonProperty() = PokemonProperty(
+    fun toPokemonProperty() = PokemonRepositoryItem(
         id = id,
         nameEng = nameEng,
         nameJp = nameJp,
@@ -28,13 +28,13 @@ data class PokemonEntity(
     )
 
     companion object {
-        fun from(pokemonProperty: PokemonProperty) = PokemonEntity(
-            id = pokemonProperty.id,
-            nameEng = pokemonProperty.nameEng,
-            nameJp = pokemonProperty.nameJp,
-            weight = pokemonProperty.weight,
-            height = pokemonProperty.height,
-            frontImageUrl = pokemonProperty.frontImageUrl
+        fun from(pokemonRepositoryItem: PokemonRepositoryItem) = PokemonEntity(
+            id = pokemonRepositoryItem.id,
+            nameEng = pokemonRepositoryItem.nameEng,
+            nameJp = pokemonRepositoryItem.nameJp,
+            weight = pokemonRepositoryItem.weight,
+            height = pokemonRepositoryItem.height,
+            frontImageUrl = pokemonRepositoryItem.frontImageUrl
         )
     }
 }

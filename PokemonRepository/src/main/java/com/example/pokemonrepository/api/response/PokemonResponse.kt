@@ -1,7 +1,6 @@
 package com.example.pokemonrepository.api.response
 
-import com.example.pokemonrepository.data.PokemonProperty
-import com.example.pokemonrepository.data.PokemonSpecies
+import com.example.pokemonrepository.data.PokemonRepositoryItem
 import com.squareup.moshi.Json
 
 data class PokemonResponse (
@@ -44,8 +43,8 @@ data class PokemonResponse (
     val frontDefault: String
         get() = sprites.frontDefault
 
-    fun toPokeMonProperty(nameJp: String? = null): PokemonProperty {
-        return PokemonProperty(
+    fun toPokeMonProperty(nameJp: String? = null): PokemonRepositoryItem {
+        return PokemonRepositoryItem(
             id, name, nameJp, weight, height, frontDefault
         )
     }

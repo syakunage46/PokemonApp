@@ -1,6 +1,6 @@
 package com.example.pokemonrepository.data
 
-data class PokemonProperty (
+data class PokemonRepositoryItem (
     val id: Long,
     val nameEng: String,
     val nameJp: String?,
