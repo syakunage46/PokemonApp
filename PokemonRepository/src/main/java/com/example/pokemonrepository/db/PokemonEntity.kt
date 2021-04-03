@@ -14,14 +14,17 @@ data class PokemonEntity(
     @ColumnInfo(name = "name_jp")
     val nameJp: String?,
     val weight: Long,
-    val height: Long
+    val height: Long,
+    @ColumnInfo(name = "front_image_url")
+    val frontImageUrl: String,
 ) {
     fun toPokemonProperty() = PokemonProperty(
         id = id,
         nameEng = nameEng,
         nameJp = nameJp,
         weight = weight,
-        height = height
+        height = height,
+        frontImageUrl = frontImageUrl
     )
 
     companion object {
@@ -30,7 +33,8 @@ data class PokemonEntity(
             nameEng = pokemonProperty.nameEng,
             nameJp = pokemonProperty.nameJp,
             weight = pokemonProperty.weight,
-            height = pokemonProperty.height
+            height = pokemonProperty.height,
+            frontImageUrl = pokemonProperty.frontImageUrl
         )
     }
 }

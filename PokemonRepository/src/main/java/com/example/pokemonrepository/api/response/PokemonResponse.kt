@@ -41,9 +41,12 @@ data class PokemonResponse (
     val sprites: Sprites,
     val stats: List<Stat>
 ) {
+    val frontDefault: String
+        get() = sprites.frontDefault
+
     fun toPokeMonProperty(nameJp: String? = null): PokemonProperty {
         return PokemonProperty(
-            id, name, nameJp, weight, height
+            id, name, nameJp, weight, height, frontDefault
         )
     }
 }

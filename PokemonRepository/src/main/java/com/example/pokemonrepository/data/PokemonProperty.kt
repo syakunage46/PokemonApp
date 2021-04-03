@@ -6,6 +6,7 @@ data class PokemonProperty (
     val nameJp: String?,
     val weight: Long,
     val height: Long,
+    val frontImageUrl: String
 ) {
     val name: String
         get() = nameJp ?: nameEng
