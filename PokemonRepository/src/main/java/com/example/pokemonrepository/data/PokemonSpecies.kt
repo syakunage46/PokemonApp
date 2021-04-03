@@ -6,5 +6,5 @@ data class PokemonSpecies(
     val id: Long,
     val name: String,
     val names: List<Name>,
-    val order: Long,
+    val order: Long
 )

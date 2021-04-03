@@ -1,5 +1,6 @@
 package com.example.pokemonrepository.api.response
 
+import com.example.pokemonrepository.data.PokemonSpecies
 import com.squareup.moshi.Json
 
 data class PokemonSpeciesResponse (
@@ -69,7 +70,16 @@ data class PokemonSpeciesResponse (
 
     val shape: NameAndURL,
     val varieties: List<Variety>
-)
+) {
+    fun toPokemonSpecies(): PokemonSpecies {
+        return PokemonSpecies(
+            id, name, names, order
+        )
+    }
+
+    val nameJp: String?
+        get() = names.find { it.language.name == "ja" }?.name
+}
 
 data class EvolutionChain (
     val url: String

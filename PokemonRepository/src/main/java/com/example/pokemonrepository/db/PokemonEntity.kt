@@ -1,5 +1,6 @@
 package com.example.pokemonrepository.db
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.pokemonrepository.data.PokemonProperty
@@ -8,13 +9,17 @@ import com.example.pokemonrepository.data.PokemonProperty
 data class PokemonEntity(
     @PrimaryKey
     val id: Long,
-    val name: String,
+    @ColumnInfo(name = "name_eng")
+    val nameEng: String,
+    @ColumnInfo(name = "name_jp")
+    val nameJp: String?,
     val weight: Long,
     val height: Long
 ) {
     fun toPokemonProperty() = PokemonProperty(
         id = id,
-        name = name,
+        nameEng = nameEng,
+        nameJp = nameJp,
         weight = weight,
         height = height
     )
@@ -22,7 +27,8 @@ data class PokemonEntity(
     companion object {
         fun from(pokemonProperty: PokemonProperty) = PokemonEntity(
             id = pokemonProperty.id,
-            name = pokemonProperty.name,
+            nameEng = pokemonProperty.nameEng,
+            nameJp = pokemonProperty.nameJp,
             weight = pokemonProperty.weight,
             height = pokemonProperty.height
         )

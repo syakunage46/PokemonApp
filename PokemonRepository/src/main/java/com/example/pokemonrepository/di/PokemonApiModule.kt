@@ -1,8 +1,6 @@
 package com.example.pokemonrepository.di
 
-import com.example.pokemonrepository.api.PokeApiConnector
-import com.example.pokemonrepository.api.PokemonApi
-import com.example.pokemonrepository.api.PokemonApiService
+import com.example.pokemonrepository.api.*
 import dagger.Module
 import dagger.Provides
 
@@ -10,5 +8,8 @@ import dagger.Provides
 class PokemonApiModule  {
 
     @Provides
-    fun providePokemonApi(pokeApiConnector: PokeApiConnector): PokemonApi = PokemonApiService(pokeApiConnector)
+    fun providePokemonApi(pokemonApiUseCases: PokemonApiUseCases): PokemonApi = PokemonApiService(pokemonApiUseCases)
+
+    @Provides
+    fun providePokemonApiUseCases(pokeApiConnector: PokeApiConnector): PokemonApiUseCases = PokemonApiUseCaseBus(pokeApiConnector)
 }
