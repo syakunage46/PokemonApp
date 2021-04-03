@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="java.util.List" />
+        <import type="com.example.myapplication.data.PokemonData"/>
+        <import type="com.example.myapplication.presenter.SwipeRefreshDelegate"/>
+
+        <variable
+            name="pokemonDataList"
+            type="List&lt;PokemonData&gt;" />
+        
+        <variable
+            name="delegate"
+            type="SwipeRefreshDelegate" />
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+    </data>
+
+    <merge>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/pokemonListRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:onRefreshListener="@{() -> delegate.onSwipeRefresh()}"
+            app:refreshing="@{isLoading}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pokemonList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:bindPokemonList="@{pokemonDataList}"
+                tools:itemCount="10"
+                tools:listitem="@layout/pokemon_list_item"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </merge>
+</layout>

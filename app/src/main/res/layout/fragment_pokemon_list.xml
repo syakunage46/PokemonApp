@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".scene.pokemonlist.PokemonListFragment">
 
-   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-       android:id="@+id/pokemonListRefresh"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
+    <data>
+        <variable
+            name="store"
+            type="com.example.myapplication.scene.pokemonlist.PokemonListStore" />
+    </data>
 
-       <androidx.recyclerview.widget.RecyclerView
-           android:id="@+id/pokemonList"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           tools:itemCount="10"
-           tools:listitem="@layout/pokemon_list_item"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <include
+            android:id="@+id/pokemonListFrame"
+            layout="@layout/pokemon_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:pokemonDataList="@{store.pokemonList}"
+            app:delegate="@{store}"
+            app:isLoading="@{store.isLoading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
