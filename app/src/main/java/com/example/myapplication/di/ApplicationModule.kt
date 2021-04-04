@@ -1,12 +1,13 @@
 package com.example.myapplication.di
 
 import android.app.Application
+import com.example.myapplication.MyApplication
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
 @Module
-class ApplicationModule(private val application: Application) {
-
-    @Provides
-    fun provideApplication() = application
+abstract class ApplicationModule {
+    @Binds
+    abstract fun provideContext(application: MyApplication): Application
 }

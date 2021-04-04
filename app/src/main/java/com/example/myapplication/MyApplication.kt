@@ -1,5 +1,12 @@
 package com.example.myapplication
 
-import android.app.Application
+import com.example.myapplication.di.DaggerApplicationComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class MyApplication: Application(){}
+class MyApplication: DaggerApplication(){
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerApplicationComponent.factory()
+                .create(this)
+    }
+}

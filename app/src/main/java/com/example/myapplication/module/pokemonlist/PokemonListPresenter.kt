@@ -1,4 +1,4 @@
-package com.example.myapplication.presenter
+package com.example.myapplication.module.pokemonlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

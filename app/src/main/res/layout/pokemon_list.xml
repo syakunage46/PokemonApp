@@ -14,7 +14,7 @@
         
         <variable
             name="delegate"
-            type="com.example.myapplication.controller.SwipeRefreshDelegate" />
+            type="SwipeRefreshDelegate" />
 
         <variable
             name="isLoading"
