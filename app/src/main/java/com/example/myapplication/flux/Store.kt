@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.Flow
 
-abstract class Store<StateDataType>(
-    private val dispatcher: Dispatcher<*, StateDataType>,
+abstract class Store<StateType>(
+    private val dispatcher: Dispatcher<*, StateType>,
     ): ViewModel() {
-    abstract val state: LiveData<StateDataType>
+    abstract val state: LiveData<StateType>
 }

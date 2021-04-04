@@ -1,7 +1,5 @@
 package com.example.myapplication.di
 
-import androidx.lifecycle.ViewModelProvider
-import com.example.myapplication.data.PokemonData
 import com.example.myapplication.flux.ActionCreator
 import com.example.myapplication.flux.Dispatcher
 import com.example.myapplication.gateway.pokemonrepository.PokemonExternalRepositoryGateway
@@ -10,8 +8,6 @@ import com.example.myapplication.module.pokemonlist.PokemonListControllerService
 import com.example.myapplication.module.pokemonlist.store.*
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Singleton
 
 @Module
@@ -28,11 +24,11 @@ class PokemonListModule {
 
     @Singleton
     @Provides
-    fun providePokemonListDispatcher(actionCreator: ActionCreator<PokemonListActionType, PokemonListEventType>): Dispatcher<PokemonListActionType, PokemonStateValue>
+    fun providePokemonListDispatcher(actionCreator: ActionCreator<PokemonListActionType, PokemonListEventType>): Dispatcher<PokemonListActionType, PokemonListState>
             = PokemonListDispatcher(actionCreator)
 
     @Singleton
     @Provides
-    fun providePokemonListStoreFactory(dispatcher: Dispatcher<PokemonListActionType, PokemonStateValue>): PokemonListStoreFactory
+    fun providePokemonListStoreFactory(dispatcher: Dispatcher<PokemonListActionType, PokemonListState>): PokemonListStoreFactory
             = PokemonListStoreFactory(dispatcher)
 }

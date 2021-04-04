@@ -4,7 +4,7 @@ import com.example.myapplication.module.pokemonlist.store.PokemonListActionType
 import com.example.myapplication.module.pokemonlist.store.PokemonListEventType
 import kotlinx.coroutines.flow.Flow
 
-interface Dispatcher<ActionType, StateDataType> {
+interface Dispatcher<ActionType, StateType> {
     val actionCreator: ActionCreator<ActionType, *>
-    val state: Flow<State<StateDataType>>
+    val state: Flow<StateType>
 }
