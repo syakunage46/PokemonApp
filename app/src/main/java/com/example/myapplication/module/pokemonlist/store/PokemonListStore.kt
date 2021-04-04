@@ -5,10 +5,12 @@ import androidx.lifecycle.*
 import com.example.myapplication.data.PokemonData
 import com.example.myapplication.flux.Dispatcher
 import com.example.myapplication.flux.Store
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@FlowPreview
 class PokemonListStore (private val dispatcher: Dispatcher<*, List<PokemonData>>): Store<List<PokemonData>>(dispatcher) {
 
     init {
@@ -16,7 +18,6 @@ class PokemonListStore (private val dispatcher: Dispatcher<*, List<PokemonData>>
             dispatcher.state.flatMapConcat { state ->
                 flow { emit(state.data) }
             }.collect {
-                Log.d("aaaaaaaaaa", "Store: ${it.size}")
                 _pokemonList.postValue(it)
             }
         }

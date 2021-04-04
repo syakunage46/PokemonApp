@@ -12,6 +12,7 @@ import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Singleton
 
 @Module
 class PokemonListModule {
@@ -20,15 +21,17 @@ class PokemonListModule {
     fun providePokemonListController(actionCreator: ActionCreator<PokemonListActionType, PokemonListEventType>): PokemonListController
             = PokemonListControllerService(actionCreator)
 
+    @Singleton
     @Provides
     fun providePokemonListActionCreator(repositoryGateway: PokemonExternalRepositoryGateway): ActionCreator<PokemonListActionType, PokemonListEventType>
             = PokemonListActionCreator(repositoryGateway)
 
-    @InternalCoroutinesApi
+    @Singleton
     @Provides
     fun providePokemonListDispatcher(actionCreator: ActionCreator<PokemonListActionType, PokemonListEventType>): Dispatcher<PokemonListActionType, List<PokemonData>>
             = PokemonListDispatcher(actionCreator)
 
+    @Singleton
     @Provides
     fun providePokemonListStoreFactory(dispatcher: Dispatcher<PokemonListActionType, List<PokemonData>>): PokemonListStoreFactory
             = PokemonListStoreFactory(dispatcher)

@@ -22,10 +22,8 @@ class PokemonListDispatcher(override val actionCreator: ActionCreator<PokemonLis
     init {
         CoroutineScope(dispatcher).launch {
             actionCreator.actionFlow.collect {
-                Log.d("aaaaaaaaaa", "Dispatcher: ")
                 when(it) {
                     is PokemonListActionType.LoadSuccess -> {
-                        Log.d("aaaaaaaaaa", "Dispatcher: ${it.pokemonDataList.size}")
                         _state.emit(State(it.pokemonDataList))
                     }
                     is PokemonListActionType.Error -> {
@@ -33,7 +31,6 @@ class PokemonListDispatcher(override val actionCreator: ActionCreator<PokemonLis
                     }
                 }
             }
-
         }
     }
 }
