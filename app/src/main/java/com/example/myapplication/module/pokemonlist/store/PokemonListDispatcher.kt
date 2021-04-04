@@ -1,5 +1,6 @@
 package com.example.myapplication.module.pokemonlist.store
 
+import android.util.Log
 import com.example.myapplication.data.PokemonData
 import com.example.myapplication.flux.ActionCreator
 import com.example.myapplication.flux.Dispatcher
@@ -7,30 +8,32 @@ import com.example.myapplication.flux.State
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
+import kotlin.coroutines.CoroutineContext
 
-@FlowPreview
-@InternalCoroutinesApi
-@ExperimentalCoroutinesApi
-class PokemonListDispatcher(override val actionCreator: ActionCreator<PokemonListActionType, *>, private val dispatcher: CoroutineDispatcher = Dispatchers.Default) : Dispatcher<PokemonListActionType, List<PokemonData>> {
+class PokemonListDispatcher(override val actionCreator: ActionCreator<PokemonListActionType, *>,
+                            private val dispatcher: CoroutineContext = Dispatchers.Default,
+)
+    : Dispatcher<PokemonListActionType, List<PokemonData>>{
 
-    override val state: Flow<State<List<PokemonData>>>
-        get() = channel.asFlow()
-    private val channel = BroadcastChannel<State<List<PokemonData>>>(Channel.BUFFERED)
+    private val _state = MutableStateFlow<State<List<PokemonData>>?>(null)
+    override val state: Flow<State<List<PokemonData>>> = _state.filterNotNull()
 
     init {
-        actionCreator.actionFlow.onEach {
-            when(it) {
-                is PokemonListActionType.LoadSuccess -> {
-                    channel.send(State(it.pokemonDataList))
-                }
-                is PokemonListActionType.Error -> {
+        CoroutineScope(dispatcher).launch {
+            actionCreator.actionFlow.collect {
+                Log.d("aaaaaaaaaa", "Dispatcher: ")
+                when(it) {
+                    is PokemonListActionType.LoadSuccess -> {
+                        Log.d("aaaaaaaaaa", "Dispatcher: ${it.pokemonDataList.size}")
+                        _state.emit(State(it.pokemonDataList))
+                    }
+                    is PokemonListActionType.Error -> {
 
+                    }
                 }
             }
-        }.launchIn(CoroutineScope(dispatcher))
+
+        }
     }
 }
