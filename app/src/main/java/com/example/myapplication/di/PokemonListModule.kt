@@ -28,11 +28,11 @@ class PokemonListModule {
 
     @Singleton
     @Provides
-    fun providePokemonListDispatcher(actionCreator: ActionCreator<PokemonListActionType, PokemonListEventType>): Dispatcher<PokemonListActionType, List<PokemonData>>
+    fun providePokemonListDispatcher(actionCreator: ActionCreator<PokemonListActionType, PokemonListEventType>): Dispatcher<PokemonListActionType, PokemonStateValue>
             = PokemonListDispatcher(actionCreator)
 
     @Singleton
     @Provides
-    fun providePokemonListStoreFactory(dispatcher: Dispatcher<PokemonListActionType, List<PokemonData>>): PokemonListStoreFactory
+    fun providePokemonListStoreFactory(dispatcher: Dispatcher<PokemonListActionType, PokemonStateValue>): PokemonListStoreFactory
             = PokemonListStoreFactory(dispatcher)
 }

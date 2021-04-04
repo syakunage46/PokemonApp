@@ -6,7 +6,7 @@ import com.example.myapplication.data.PokemonData
 import com.example.myapplication.flux.Dispatcher
 import javax.inject.Inject
 
-class PokemonListStoreFactory @Inject constructor(private val  dispatcher: Dispatcher<*, List<PokemonData>>): ViewModelProvider.Factory {
+class PokemonListStoreFactory @Inject constructor(private val  dispatcher: Dispatcher<*, PokemonStateValue>): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PokemonListStore::class.java)) {
             return PokemonListStore(dispatcher) as T

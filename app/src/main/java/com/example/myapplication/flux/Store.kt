@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 abstract class Store<StateDataType>(
     private val dispatcher: Dispatcher<*, StateDataType>,
     ): ViewModel() {
-    abstract val data: LiveData<StateDataType>
+    abstract val state: LiveData<StateDataType>
 }

@@ -13,6 +13,7 @@ class PokemonListActionCreator(private val repositoryGateway: PokemonExternalRep
     override val actionFlow: Flow<PokemonListActionType> = _actionFlow.filterNotNull()
 
     private suspend fun getPokemonList() {
+        _actionFlow.emit(PokemonListActionType.InLoading())
         val pokemonDataList = repositoryGateway.getPokemonList(10)
         val action = PokemonListActionType.LoadSuccess(pokemonDataList)
         _actionFlow.emit(action)

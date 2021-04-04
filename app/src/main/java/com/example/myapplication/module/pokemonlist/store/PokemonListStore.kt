@@ -11,23 +11,20 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @FlowPreview
-class PokemonListStore (private val dispatcher: Dispatcher<*, List<PokemonData>>): Store<List<PokemonData>>(dispatcher) {
+class PokemonListStore (private val dispatcher: Dispatcher<*, PokemonStateValue>): Store<PokemonStateValue>(dispatcher) {
 
     init {
         viewModelScope.launch {
             dispatcher.state.flatMapConcat { state ->
-                flow { emit(state.data) }
+                flow { emit(state.value) }
             }.collect {
-                _pokemonList.postValue(it)
+                val nextStateValue = PokemonStateValue(it.pokemonList ?: _state.value?.pokemonList, it.isLoading)
+                _state.postValue(nextStateValue)
             }
         }
     }
 
-    private val _pokemonList = MutableLiveData<List<PokemonData>>()
-    override val data: LiveData<List<PokemonData>>
-        get() = _pokemonList
-
-    private val _isLoading = MutableLiveData<Boolean>(false)
-    val isLoading: LiveData<Boolean>
-        get() = _isLoading
+    private val _state = MutableLiveData<PokemonStateValue>()
+    override val state: LiveData<PokemonStateValue>
+        get() = _state
 }
