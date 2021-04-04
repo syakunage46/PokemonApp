@@ -6,5 +6,5 @@ import com.example.pokemonrepository.db.PokemonEntity
 
 class PokemonLocalDataSourceService(private val pokemonDao: PokemonDao): PokemonLocalDataSource {
     override suspend fun addPokemon(pokemon: PokemonRepositoryItem) = pokemonDao.addPokemon(PokemonEntity.from(pokemon))
-    override suspend fun getPokemonList(limit: Int): List<PokemonRepositoryItem> = pokemonDao.getPokemonEntities(limit).map { it.toPokemonProperty() }
+    override suspend fun getPokemonList(limit: Int, offset: Int): List<PokemonRepositoryItem> = pokemonDao.getPokemonEntities(limit, offset).map { it.toPokemonProperty() }
 }

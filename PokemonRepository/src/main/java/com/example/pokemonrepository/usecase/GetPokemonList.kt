@@ -4,11 +4,11 @@ import com.example.pokemonrepository.data.PokemonRepositoryItem
 import com.example.pokemonrepository.repository.PokemonRepository
 
 interface GetPokemonList {
-    suspend operator fun invoke(limit: Int): List<PokemonRepositoryItem>
+    suspend operator fun invoke(limit: Int, offset: Int): List<PokemonRepositoryItem>
 }
 
 class GetPokemonListInteractor (private val pokemonRepository: PokemonRepository): GetPokemonList {
-    override suspend operator fun invoke(limit: Int): List<PokemonRepositoryItem> {
-        return pokemonRepository.getPokemonList(limit)
+    override suspend operator fun invoke(limit: Int, offset: Int): List<PokemonRepositoryItem> {
+        return pokemonRepository.getPokemonList(limit, offset)
     }
 }

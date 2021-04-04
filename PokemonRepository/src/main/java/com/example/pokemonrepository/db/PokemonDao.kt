@@ -10,6 +10,6 @@ interface PokemonDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addPokemon(pokemonEntity: PokemonEntity)
 
-    @Query("SELECT * FROM pokemon LIMIT :limit")
-    suspend fun getPokemonEntities(limit: Int): List<PokemonEntity>
+    @Query("SELECT * FROM pokemon LIMIT :limit OFFSET :offset")
+    suspend fun getPokemonEntities(limit: Int, offset: Int): List<PokemonEntity>
 }

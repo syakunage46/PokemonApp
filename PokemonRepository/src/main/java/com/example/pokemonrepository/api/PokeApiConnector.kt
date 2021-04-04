@@ -10,7 +10,7 @@ import retrofit2.http.Query
 
 interface PokeApiConnector {
     @GET("pokemon")
-    fun getPokemonListAsync(@Query("limit")limit: Int): Deferred<PokemonListResponse>
+    fun getPokemonListAsync(@Query("limit")limit: Int,@Query("offset")offset: Int): Deferred<PokemonListResponse>
 
     @GET("pokemon/{id}")
     fun getPokemonAsync(@Path("id") id: Long): Deferred<PokemonResponse>

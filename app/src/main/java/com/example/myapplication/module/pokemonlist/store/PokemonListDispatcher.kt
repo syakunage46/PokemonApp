@@ -26,6 +26,13 @@ class PokemonListDispatcher(override val actionCreator: ActionCreator<PokemonLis
                             return@emit it
                         }
                     }
+                    is PokemonListActionType.AdditionalLoadSuccess -> {
+                        _state.emit {
+                            it.pokemonList = it.pokemonList?.plus(action.pokemonDataList)
+                            it.isLoading = false
+                            return@emit it
+                        }
+                    }
                     is PokemonListActionType.InLoading -> {
                         _state.emit {
                             it.isLoading = true

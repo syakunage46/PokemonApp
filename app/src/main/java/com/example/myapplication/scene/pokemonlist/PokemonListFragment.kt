@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.controller.InfiniteScrollListener
 import com.example.myapplication.databinding.FragmentPokemonListBinding
 import com.example.myapplication.module.pokemonlist.PokemonListController
 import com.example.myapplication.module.pokemonlist.PokemonListPresenter.PokemonListAdapter
@@ -45,7 +46,11 @@ class PokemonListFragment: DaggerFragment() {
 
         binding.pokemonListFrame.pokemonList.apply {
             adapter = pokemonListAdapter
-            layoutManager = LinearLayoutManager(context)
+            val linearLayoutManager = LinearLayoutManager(context)
+            layoutManager = linearLayoutManager
+            addOnScrollListener(InfiniteScrollListener(linearLayoutManager) {
+                controller.onScrolledToEnd(store.state.value?.pokemonList?.size ?: 0)
+            })
         }
     }
 }
