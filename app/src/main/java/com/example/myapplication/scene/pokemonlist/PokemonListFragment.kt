@@ -28,11 +28,12 @@ class PokemonListFragment: DaggerFragment() {
 
     val store: PokemonListStore by viewModels { factory }
 
+    lateinit var scrollListener: InfiniteScrollListener
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentPokemonListBinding.inflate(inflater)
         binding.store = store
-        binding.controller = controller
         binding.lifecycleOwner = viewLifecycleOwner
         bindRecyclerView()
         controller.onCreate()
@@ -48,9 +49,15 @@ class PokemonListFragment: DaggerFragment() {
             adapter = pokemonListAdapter
             val linearLayoutManager = LinearLayoutManager(context)
             layoutManager = linearLayoutManager
-            addOnScrollListener(InfiniteScrollListener(linearLayoutManager) {
+            scrollListener = InfiniteScrollListener(linearLayoutManager) {
                 controller.onScrolledToEnd(store.state.value?.pokemonList?.size ?: 0)
-            })
+            }
+            addOnScrollListener(scrollListener)
+        }
+
+        binding.pokemonListFrame.pokemonListRefresh.setOnRefreshListener {
+            controller.onCreate()
+            scrollListener.refresh()
         }
     }
 }

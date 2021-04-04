@@ -32,8 +32,6 @@ class PokemonListActionCreator(private val repositoryGateway: PokemonExternalRep
                 is PokemonListEventType.OnScrolledToEnd -> {
                     appendPokemonList(offset = eventType.offset)
                 }
-                is PokemonListEventType.OnSwipeRefresh -> {
-                }
                 else -> {
                     getPokemonList()
                 }

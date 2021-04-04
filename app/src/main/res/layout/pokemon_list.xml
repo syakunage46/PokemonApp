@@ -6,15 +6,10 @@
     <data>
         <import type="java.util.List" />
         <import type="com.example.myapplication.data.PokemonData"/>
-        <import type="com.example.myapplication.controller.SwipeRefreshDelegate"/>
 
         <variable
             name="pokemonDataList"
             type="List&lt;PokemonData&gt;" />
-        
-        <variable
-            name="delegate"
-            type="SwipeRefreshDelegate" />
 
         <variable
             name="isLoading"
@@ -26,7 +21,6 @@
             android:id="@+id/pokemonListRefresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:onRefreshListener="@{() -> delegate.onSwipeRefresh()}"
             app:refreshing="@{isLoading}">
 
             <androidx.recyclerview.widget.RecyclerView

@@ -8,9 +8,6 @@
         <variable
             name="store"
             type="com.example.myapplication.module.pokemonlist.store.PokemonListStore" />
-        <variable
-            name="controller"
-            type="com.example.myapplication.module.pokemonlist.PokemonListController" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +20,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:pokemonDataList="@{store.state.pokemonList}"
-            app:delegate="@{controller}"
             app:isLoading="@{store.state.isLoading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
