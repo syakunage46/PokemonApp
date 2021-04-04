@@ -4,6 +4,6 @@ import com.example.myapplication.data.PokemonData
 import com.example.myapplication.flux.State
 
 data class PokemonListState(
-    val pokemonList: List<PokemonData>?,
-    val isLoading: Boolean
+    var pokemonList: List<PokemonData>?,
+    var isLoading: Boolean
 ): State

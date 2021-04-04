@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface Dispatcher<ActionType, StateType> {
     val actionCreator: ActionCreator<ActionType, *>
-    val state: Flow<StateType>
+    val state: Flow<(StateType) -> StateType>
 }

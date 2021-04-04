@@ -12,19 +12,25 @@ class PokemonListDispatcher(override val actionCreator: ActionCreator<PokemonLis
 )
     : Dispatcher<PokemonListActionType, PokemonListState>{
 
-    private val _state = MutableStateFlow<PokemonListState?>(null)
-    override val state: Flow<(PokemonListState)> = _state.filterNotNull()
+    private val _state = MutableStateFlow<((PokemonListState) -> PokemonListState)?>(null)
+    override val state: Flow<(PokemonListState) -> PokemonListState> = _state.filterNotNull()
 
     init {
         CoroutineScope(dispatcher).launch {
-            actionCreator.actionFlow.collect {
-                when(it) {
+            actionCreator.actionFlow.collect { action ->
+                when(action) {
                     is PokemonListActionType.LoadSuccess -> {
-                        val state = PokemonListState(it.pokemonDataList, false)
-                        _state.emit(state)
+                        _state.emit {
+                            it.pokemonList = action.pokemonDataList
+                            it.isLoading = false
+                            return@emit it
+                        }
                     }
                     is PokemonListActionType.InLoading -> {
-                        _state.emit(PokemonListState(null, true))
+                        _state.emit {
+                            it.isLoading = true
+                            return@emit it
+                        }
                     }
                     is PokemonListActionType.Error -> {
 
