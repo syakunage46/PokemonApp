@@ -1,4 +1,4 @@
-package com.example.pokemonrepository.repository.local
+package com.example.pokemonrepository.repository.datasource.local
 
 import com.example.pokemonrepository.data.PokemonRepositoryItem
 

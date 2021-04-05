@@ -1,7 +1,7 @@
 package com.example.pokemonrepository.repository
 
-import com.example.pokemonrepository.data.PokemonRepositoryItem
+import com.example.pokemonrepository.usecase.GetPokemonList
 
 interface PokemonRepository {
-    suspend fun getPokemonList(limit: Int, offset: Int): List<PokemonRepositoryItem>
+    val getPokemonList: GetPokemonList
 }

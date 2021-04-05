@@ -5,7 +5,7 @@ import com.example.myapplication.gateway.pokemonrepository.PokemonExternalReposi
 import com.example.myapplication.gateway.pokemonrepository.PokemonExternalRepositoryUseCaseBus
 import com.example.myapplication.gateway.pokemonrepository.PokemonExternalRepositoryUseCases
 import com.example.pokemonrepository.PokemonRepositoryGateway
-import com.example.pokemonrepository.PokemonRepositoryUseCases
+import com.example.pokemonrepository.repository.PokemonRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -14,13 +14,13 @@ import javax.inject.Singleton
 class PokemonRepositoryGatewayModule {
     @Singleton
     @Provides
-    fun providePokemonRepositoryGateway(app: Application): PokemonRepositoryUseCases
+    fun providePokemonRepositoryGateway(app: Application): PokemonRepository
             = PokemonRepositoryGateway.getInstance(app)
 
     @Singleton
     @Provides
-    fun providePokemonExternalRepositoryUseCases(pokemonRepositoryUseCases: PokemonRepositoryUseCases): PokemonExternalRepositoryUseCases
-            = PokemonExternalRepositoryUseCaseBus(pokemonRepositoryUseCases)
+    fun providePokemonExternalRepositoryUseCases(pokemonRepository: PokemonRepository): PokemonExternalRepositoryUseCases
+            = PokemonExternalRepositoryUseCaseBus(pokemonRepository)
 
     @Singleton
     @Provides

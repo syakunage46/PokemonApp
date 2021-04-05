@@ -1,4 +1,4 @@
-package com.example.pokemonrepository.repository.remote
+package com.example.pokemonrepository.repository.datasource.remote
 
 import com.example.pokemonrepository.api.PokemonApi
 import com.example.pokemonrepository.data.PokemonRepositoryItem
