@@ -51,7 +51,7 @@ class PokemonListFragment: DaggerFragment() {
         store.state.observe(viewLifecycleOwner, Observer {
             it ?: return@Observer
             it.error?.let {
-                Toast.makeText(context, "データの取得に失敗しました", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.fail_get_pokemon_list, Toast.LENGTH_SHORT).show()
             }
         })
 
