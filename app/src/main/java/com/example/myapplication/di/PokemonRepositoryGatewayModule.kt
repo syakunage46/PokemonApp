@@ -1,9 +1,8 @@
 package com.example.myapplication.di
 
 import android.app.Application
-import com.example.myapplication.gateway.pokemonrepository.PokemonExternalRepositoryGateway
-import com.example.myapplication.gateway.pokemonrepository.PokemonExternalRepositoryUseCaseBus
-import com.example.myapplication.gateway.pokemonrepository.PokemonExternalRepositoryUseCases
+import com.example.myapplication.gateway.pokemonrepository.PokemonRepositoryUseCases
+import com.example.myapplication.gateway.pokemonrepository.PokemonRepositoryUseCasesService
 import com.example.pokemonrepository.PokemonRepositoryGateway
 import com.example.pokemonrepository.repository.PokemonRepository
 import dagger.Module
@@ -19,11 +18,6 @@ class PokemonRepositoryGatewayModule {
 
     @Singleton
     @Provides
-    fun providePokemonExternalRepositoryUseCases(pokemonRepository: PokemonRepository): PokemonExternalRepositoryUseCases
-            = PokemonExternalRepositoryUseCaseBus(pokemonRepository)
-
-    @Singleton
-    @Provides
-    fun providePokemonExternalRepositoryGateway(pokemonExternalRepositoryUseCases: PokemonExternalRepositoryUseCases)
-            = PokemonExternalRepositoryGateway(pokemonExternalRepositoryUseCases)
+    fun providePokemonRepositoryUseCases(pokemonRepository: PokemonRepository): PokemonRepositoryUseCases
+            = PokemonRepositoryUseCasesService(pokemonRepository)
 }

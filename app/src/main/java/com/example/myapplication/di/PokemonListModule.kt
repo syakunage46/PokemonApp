@@ -2,7 +2,7 @@ package com.example.myapplication.di
 
 import com.example.myapplication.flux.ActionCreator
 import com.example.myapplication.flux.Dispatcher
-import com.example.myapplication.gateway.pokemonrepository.PokemonExternalRepositoryGateway
+import com.example.myapplication.gateway.pokemonrepository.PokemonRepositoryUseCases
 import com.example.myapplication.module.pokemonlist.PokemonListController
 import com.example.myapplication.module.pokemonlist.PokemonListControllerService
 import com.example.myapplication.module.pokemonlist.store.*
@@ -19,8 +19,8 @@ class PokemonListModule {
 
     @Singleton
     @Provides
-    fun providePokemonListActionCreator(repositoryGateway: PokemonExternalRepositoryGateway): ActionCreator<PokemonListActionType, PokemonListEventType>
-            = PokemonListActionCreator(repositoryGateway)
+    fun providePokemonListActionCreator(pokemonRepositoryUseCases: PokemonRepositoryUseCases): ActionCreator<PokemonListActionType, PokemonListEventType>
+            = PokemonListActionCreator(pokemonRepositoryUseCases)
 
     @Singleton
     @Provides

@@ -1,14 +1,13 @@
 package com.example.myapplication.module.pokemonlist.store
 
-import android.util.Log
 import com.example.myapplication.flux.ActionCreator
-import com.example.myapplication.gateway.pokemonrepository.PokemonExternalRepositoryGateway
+import com.example.myapplication.gateway.pokemonrepository.PokemonRepositoryUseCases
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.*
 
 @ExperimentalCoroutinesApi
-class PokemonListActionCreator(private val repositoryGateway: PokemonExternalRepositoryGateway,
+class PokemonListActionCreator(private val useCases: PokemonRepositoryUseCases,
                                private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default)
     : ActionCreator<PokemonListActionType, PokemonListEventType>{
 
@@ -30,10 +29,10 @@ class PokemonListActionCreator(private val repositoryGateway: PokemonExternalRep
     }
 
     private suspend fun getPokemonList(offset: Int = 0)
-        = PokemonListActionType.LoadSuccess(repositoryGateway.getPokemonList(REQUEST_ITEM_COUNT, offset))
+        = PokemonListActionType.LoadSuccess(useCases.getPokemonList(REQUEST_ITEM_COUNT, offset))
 
     private suspend fun appendPokemonList(offset: Int)
-        = PokemonListActionType.AdditionalLoadSuccess(repositoryGateway.getPokemonList(REQUEST_ITEM_COUNT, offset))
+        = PokemonListActionType.AdditionalLoadSuccess(useCases.getPokemonList(REQUEST_ITEM_COUNT, offset))
 
 
     override operator fun invoke(eventType: PokemonListEventType) {
