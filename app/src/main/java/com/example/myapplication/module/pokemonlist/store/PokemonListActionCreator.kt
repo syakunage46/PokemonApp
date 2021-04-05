@@ -1,13 +1,20 @@
 package com.example.myapplication.module.pokemonlist.store
 
+import android.util.Log
 import com.example.myapplication.flux.ActionCreator
 import com.example.myapplication.gateway.pokemonrepository.PokemonExternalRepositoryGateway
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
 class PokemonListActionCreator(private val repositoryGateway: PokemonExternalRepositoryGateway,
-                               private val dispatcher: CoroutineDispatcher = Dispatchers.Default)
+                               private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default)
     : ActionCreator<PokemonListActionType, PokemonListEventType>{
+
+    private val exceptionHandler: CoroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        Log.e("PokemonListActionCreator", "例外キャッチ $throwable")
+    }
+    private val job = SupervisorJob()
+    private val scope = CoroutineScope(coroutineDispatcher + job + exceptionHandler)
 
     private val _actionFlow = MutableStateFlow<PokemonListActionType?>(null)
     override val actionFlow: Flow<PokemonListActionType> = _actionFlow.filterNotNull()
@@ -27,7 +34,7 @@ class PokemonListActionCreator(private val repositoryGateway: PokemonExternalRep
     }
 
     override operator fun invoke(eventType: PokemonListEventType) {
-        CoroutineScope(dispatcher).launch {
+        scope.launch {
             when(eventType){
                 is PokemonListEventType.OnScrolledToEnd -> {
                     appendPokemonList(offset = eventType.offset)
@@ -37,6 +44,10 @@ class PokemonListActionCreator(private val repositoryGateway: PokemonExternalRep
                 }
             }
         }
+    }
+
+    override fun dispose() {
+       job.cancel()
     }
 
     companion object {

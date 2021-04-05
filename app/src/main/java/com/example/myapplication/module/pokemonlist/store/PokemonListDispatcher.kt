@@ -1,22 +1,27 @@
 package com.example.myapplication.module.pokemonlist.store
 
+import android.util.Log
 import com.example.myapplication.flux.ActionCreator
 import com.example.myapplication.flux.Dispatcher
-import com.example.myapplication.flux.State
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlin.coroutines.CoroutineContext
 
 class PokemonListDispatcher(override val actionCreator: ActionCreator<PokemonListActionType, *>,
-                            private val dispatcher: CoroutineContext = Dispatchers.Default,
+                            private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default,
 )
     : Dispatcher<PokemonListActionType, PokemonListState>{
+
+    private val exceptionHandler: CoroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        Log.e("PokemonListDispatcher", "例外キャッチ $throwable")
+    }
+    private val job = SupervisorJob()
+    private val scope = CoroutineScope(coroutineDispatcher + job + exceptionHandler)
 
     private val _state = MutableStateFlow<((PokemonListState) -> PokemonListState)?>(null)
     override val state: Flow<(PokemonListState) -> PokemonListState> = _state.filterNotNull()
 
     init {
-        CoroutineScope(dispatcher).launch {
+        scope.launch {
             actionCreator.actionFlow.collect { action ->
                 when(action) {
                     is PokemonListActionType.LoadSuccess -> {
@@ -45,5 +50,9 @@ class PokemonListDispatcher(override val actionCreator: ActionCreator<PokemonLis
                 }
             }
         }
+    }
+
+    override fun dispose() {
+        job.cancel()
     }
 }
