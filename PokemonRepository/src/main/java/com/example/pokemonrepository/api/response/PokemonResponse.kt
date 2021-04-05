@@ -5,20 +5,28 @@ import com.squareup.moshi.Json
 
 data class PokemonResponse (
     val id: Long,
+    val order: Long,
     val name: String,
     val types: List<Type>,
     val weight: Long,
     val height: Long,
-    val order: Long,
     val species: NameAndURL,
     val sprites: Sprites
 ) {
     private val frontDefault: String
         get() = sprites.frontDefault
 
-    fun toPokemonRepositoryItem(nameJp: String? = null): PokemonRepositoryItem {
+    fun toPokemonRepositoryItem(speciesResponse: PokemonSpeciesResponse): PokemonRepositoryItem {
         return PokemonRepositoryItem(
-            id, name, nameJp, weight, height, frontDefault
+            id,
+            order,
+            name,
+            speciesResponse.nameJp,
+            weight,
+            height,
+            speciesResponse.generaJp,
+            speciesResponse.flavorTextJp,
+            frontDefault
         )
     }
 }

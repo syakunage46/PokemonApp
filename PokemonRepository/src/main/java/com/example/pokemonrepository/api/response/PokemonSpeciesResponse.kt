@@ -1,6 +1,5 @@
 package com.example.pokemonrepository.api.response
 
-import com.example.pokemonrepository.data.PokemonSpecies
 import com.squareup.moshi.Json
 
 data class PokemonSpeciesResponse (
@@ -18,14 +17,14 @@ data class PokemonSpeciesResponse (
     val genera: List<Genus>,
     val generation: NameAndURL
 ) {
-    fun toPokemonSpecies(): PokemonSpecies {
-        return PokemonSpecies(
-            id, name, names, order
-        )
-    }
-
     val nameJp: String?
         get() = names.find { it.language.name == "ja" }?.name
+
+    val flavorTextJp: String
+        get() = flavorTextEntries.find { it.language.name == "ja" }?.flavorText ?: ""
+
+    val generaJp: String
+        get() = genera.find { it.language.name == "ja" }?.genus ?: ""
 }
 
 data class EvolutionChain (

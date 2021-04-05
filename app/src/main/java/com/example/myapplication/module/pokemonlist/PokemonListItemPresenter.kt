@@ -13,6 +13,12 @@ object PokemonListItemPresenter {
         imageURL(pokemonData.frontImageUrl)
     }
 
+    @BindingAdapter("pokemonNumber")
+    @JvmStatic
+    fun TextView.setPokemonNumber(pokemonData: PokemonData) {
+        text = pokemonData.order.toString()
+    }
+
     @BindingAdapter("pokemonName")
     @JvmStatic
     fun TextView.setPokemonName(pokemonData: PokemonData) {

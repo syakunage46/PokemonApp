@@ -25,8 +25,8 @@ class GetPokemonListFromApiInteractor (private val apiConnector: PokeApiConnecto
             val pokemonResponseAsync = async{ apiConnector.getPokemonAsync(pokemonName) }
             val speciesResponseAsync = async{ apiConnector.getPokemonSpeciesAsync(pokemonName)}
             val pokemonResponse = pokemonResponseAsync.await()
-            val pokemonNameJp = speciesResponseAsync.await().nameJp
-            return@withContext pokemonResponse.toPokemonRepositoryItem(pokemonNameJp)
+            val speciesResponse = speciesResponseAsync.await()
+            return@withContext pokemonResponse.toPokemonRepositoryItem(speciesResponse)
         }
     }
 }

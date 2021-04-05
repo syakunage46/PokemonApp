@@ -28,6 +28,19 @@
             tools:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView
+            android:id="@+id/pokemonNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:pokemonNumber="@{pokemonData}"
+            app:layout_constraintBottom_toTopOf="@+id/pokemonName"
+            app:layout_constraintStart_toEndOf="@+id/pokemonImage"
+            app:layout_constraintStart_toStartOf="@+id/pokemonName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="No.025" />
+
+        <TextView
             android:id="@+id/pokemonName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,12 +49,13 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:textSize="36sp"
-            app:layout_constraintBottom_toBottomOf="@+id/pokemonImage"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/pokemonImage"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemonNumber"
             app:pokemonName="@{pokemonData}"
             tools:text="ピカチュウ" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
