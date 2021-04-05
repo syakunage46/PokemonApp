@@ -34,7 +34,10 @@
                 android:layout_height="match_parent"
                 app:bindPokemonList="@{pokemonDataList}"
                 tools:itemCount="10"
-                tools:listitem="@layout/pokemon_list_item"/>
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/pokemon_list_item"
+                tools:orientation="vertical"
+                tools:spanCount="3" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </merge>
