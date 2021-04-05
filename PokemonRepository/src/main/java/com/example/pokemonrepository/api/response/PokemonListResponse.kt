@@ -6,6 +6,7 @@ data class PokemonListResponse(
     val count: Long,
     @Json(name = "next")
     val nextUrl: String?,
-    val previous: String?,
+    @Json(name = "previous")
+    val previousUrl: String?,
     val results: List<NameAndURL>
 )
