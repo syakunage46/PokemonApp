@@ -45,7 +45,11 @@ class PokemonListDispatcher(override val actionCreator: ActionCreator<PokemonLis
                         }
                     }
                     is PokemonListActionType.Error -> {
-
+                        _state.emit {
+                            it.error = action.error
+                            it.isLoading = false
+                            return@emit it
+                        }
                     }
                 }
             }

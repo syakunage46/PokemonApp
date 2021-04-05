@@ -13,7 +13,7 @@ class PokemonListStore (private val dispatcher: Dispatcher<*, PokemonListState>)
     init {
         viewModelScope.launch {
             dispatcher.state.collect {
-                val nextStateValue = it(state.value ?: PokemonListState(null, false))
+                val nextStateValue = it(state.value ?: PokemonListState(null, false, null))
                 _state.postValue(nextStateValue)
             }
         }

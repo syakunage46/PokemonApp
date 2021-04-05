@@ -4,38 +4,41 @@ import android.util.Log
 import com.example.myapplication.flux.ActionCreator
 import com.example.myapplication.gateway.pokemonrepository.PokemonExternalRepositoryGateway
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.*
 
+@ExperimentalCoroutinesApi
 class PokemonListActionCreator(private val repositoryGateway: PokemonExternalRepositoryGateway,
                                private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default)
     : ActionCreator<PokemonListActionType, PokemonListEventType>{
 
     private val exceptionHandler: CoroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        Log.e("PokemonListActionCreator", "例外キャッチ $throwable")
+        _actionFlow.offer(PokemonListActionType.Error(throwable))
     }
     private val job = SupervisorJob()
     private val scope = CoroutineScope(coroutineDispatcher + job + exceptionHandler)
 
-    private val _actionFlow = MutableStateFlow<PokemonListActionType?>(null)
-    override val actionFlow: Flow<PokemonListActionType> = _actionFlow.filterNotNull()
+    private val _actionFlow = ConflatedBroadcastChannel<PokemonListActionType>()
+    override val actionFlow: Flow<PokemonListActionType> = _actionFlow.asFlow()
 
-    private suspend fun getPokemonList(offset: Int = 0) {
-        _actionFlow.emit(PokemonListActionType.InLoading())
-        val pokemonDataList = repositoryGateway.getPokemonList(REQUEST_ITEM_COUNT, offset)
-        val action = PokemonListActionType.LoadSuccess(pokemonDataList)
-        _actionFlow.emit(action)
+    private fun launchDataLoad(block: suspend () -> PokemonListActionType) {
+        scope.launch {
+            _actionFlow.send(PokemonListActionType.InLoading())
+            val action = block()
+            _actionFlow.send(action)
+        }
     }
 
-    private suspend fun appendPokemonList(offset: Int) {
-        _actionFlow.emit(PokemonListActionType.InLoading())
-        val pokemonDataList = repositoryGateway.getPokemonList(REQUEST_ITEM_COUNT, offset)
-        val action = PokemonListActionType.AdditionalLoadSuccess(pokemonDataList)
-        _actionFlow.emit(action)
-    }
+    private suspend fun getPokemonList(offset: Int = 0)
+        = PokemonListActionType.LoadSuccess(repositoryGateway.getPokemonList(REQUEST_ITEM_COUNT, offset))
+
+    private suspend fun appendPokemonList(offset: Int)
+        = PokemonListActionType.AdditionalLoadSuccess(repositoryGateway.getPokemonList(REQUEST_ITEM_COUNT, offset))
+
 
     override operator fun invoke(eventType: PokemonListEventType) {
-        scope.launch {
-            when(eventType){
+        launchDataLoad {
+            return@launchDataLoad when(eventType){
                 is PokemonListEventType.OnScrolledToEnd -> {
                     appendPokemonList(offset = eventType.offset)
                 }

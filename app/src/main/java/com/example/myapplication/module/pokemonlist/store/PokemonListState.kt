@@ -5,5 +5,6 @@ import com.example.myapplication.flux.State
 
 data class PokemonListState(
     var pokemonList: List<PokemonData>?,
-    var isLoading: Boolean
+    var isLoading: Boolean,
+    var error: Throwable?
 ): State

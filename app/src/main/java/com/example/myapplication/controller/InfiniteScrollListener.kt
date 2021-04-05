@@ -21,9 +21,9 @@ class InfiniteScrollListener(private val layoutManager: LinearLayoutManager, val
             firstVisibleItem = layoutManager.findFirstVisibleItemPosition();
 
             if (loading) {
-                if (totalItemCount > previousTotal) {
-                    loading = false;
-                    previousTotal = totalItemCount;
+                if (totalItemCount != previousTotal) {
+                    loading = false
+                    previousTotal = totalItemCount
                 }
             }
             if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold )) {
@@ -32,14 +32,4 @@ class InfiniteScrollListener(private val layoutManager: LinearLayoutManager, val
             }
         }
     }
-
-    fun refresh() {
-        previousTotal = 0
-        loading = true
-        visibleThreshold = 2
-        firstVisibleItem = 0
-        visibleItemCount = 0
-        totalItemCount = 0
-    }
-
 }
