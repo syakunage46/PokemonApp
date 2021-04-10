@@ -1,5 +1,11 @@
 package com.example.stateholder.entities
 
-interface ActionCreatorInterFace
+import kotlinx.coroutines.flow.Flow
 
-class ActionCreator: ActionCreatorInterFace
+interface ActionCreatorInterFace<EventType, ActionType: Action> {
+    val actionFlow: Flow<ActionType>
+    operator fun invoke(eventType: EventType)
+    fun dispose()
+}
+
+//class ActionCreator: ActionCreatorInterFace
