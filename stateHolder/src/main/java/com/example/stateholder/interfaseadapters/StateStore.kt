@@ -5,12 +5,12 @@ import com.example.stateholder.entities.State
 import com.example.stateholder.usecases.StateRecipient
 import kotlinx.coroutines.flow.*
 
-interface StateStoreInterFace: StateRecipient {
+interface StateStoreInterface: StateRecipient {
     val stateFLow: StateFlow<State>
     val state: State
 }
 
-internal class StateStore(initialState: State): StateStoreInterFace {
+internal class StateStore(initialState: State): StateStoreInterface {
     private val _stateFlow = MutableStateFlow(initialState)
     override val stateFLow: StateFlow<State>
         get() = _stateFlow

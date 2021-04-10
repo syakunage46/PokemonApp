@@ -2,7 +2,7 @@ package com.example.stateholder.frameworks
 
 import android.util.Log
 import com.example.stateholder.interfaseadapters.Event
-import com.example.stateholder.interfaseadapters.EventControllerInterFace
+import com.example.stateholder.interfaseadapters.EventControllerInterface
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -13,7 +13,7 @@ interface EventListenerInterface {
 }
 
 class EventListener(override val eventFlow: Flow<Event>,
-                    private val controller: EventControllerInterFace,
+                    private val controller: EventControllerInterface,
                     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default): EventListenerInterface {
 
     private val exceptionHandler: CoroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->

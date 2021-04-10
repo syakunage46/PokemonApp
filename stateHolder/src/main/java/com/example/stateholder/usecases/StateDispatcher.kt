@@ -1,22 +1,20 @@
 package com.example.stateholder.usecases
 
 import android.util.Log
-import com.example.stateholder.entities.Action
 import com.example.stateholder.entities.Alter
 import com.example.stateholder.entities.AlterStateReceiver
-import com.example.stateholder.entities.State
 import com.example.stateholder.frameworks.EventListener
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 
-interface StateDispatcherInterFace: AlterStateReceiver {
+interface StateDispatcherInterface: AlterStateReceiver {
     val stateRecipient: StateRecipient
 }
 
 class StateDispatcher(override val alterFlow: Flow<Alter>,
                       override val stateRecipient: StateRecipient,
-                      private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default) : StateDispatcherInterFace {
+                      private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default) : StateDispatcherInterface {
 
     private val exceptionHandler: CoroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Log.e(EventListener.TAG, "error: ${throwable.localizedMessage}")

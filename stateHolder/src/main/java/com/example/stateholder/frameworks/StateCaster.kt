@@ -1,12 +1,12 @@
 package com.example.stateholder.frameworks
 
 import com.example.stateholder.entities.State
-import com.example.stateholder.interfaseadapters.StateStoreInterFace
+import com.example.stateholder.interfaseadapters.StateStoreInterface
 import kotlinx.coroutines.flow.StateFlow
 
-interface StateCasterInterFace {
+interface StateCasterInterface {
     val stateFLow: StateFlow<State>
 }
-class StateCaster(private val stateStore: StateStoreInterFace): StateCasterInterFace {
+class StateCaster(private val stateStore: StateStoreInterface): StateCasterInterface {
     override val stateFLow: StateFlow<State> = stateStore.stateFLow
 }

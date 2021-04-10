@@ -1,15 +1,15 @@
 package com.example.stateholder.usecases
 
-import com.example.stateholder.entities.AlterCreatorInterFace
+import com.example.stateholder.entities.AlterCreatorInterface
 import com.example.stateholder.usecases.actionplan.GetPokemonList
 import com.example.stateholder.usecases.actionplan.GetPokemonListInteractor
 
-interface ActionPlannerInterFace
+interface ActionPlannerInterface
 
-interface PokemonListActionPlannerInterFace: ActionPlannerInterFace {
+interface PokemonListActionPlannerInterface: ActionPlannerInterface {
     val getPokemonList: GetPokemonList
 }
 
-internal class PokemonListActionPlanner(alterCreatorInterFace: AlterCreatorInterFace): PokemonListActionPlannerInterFace {
+internal class PokemonListActionPlanner(alterCreatorInterFace: AlterCreatorInterface): PokemonListActionPlannerInterface {
     override val getPokemonList: GetPokemonList = GetPokemonListInteractor(alterCreatorInterFace)
 }

@@ -1,15 +1,13 @@
 package com.example.stateholder.interfaseadapters
 
-import com.example.stateholder.entities.Action
-import com.example.stateholder.usecases.ActionPlannerInterFace
-import com.example.stateholder.usecases.PokemonListActionPlanner
+import com.example.stateholder.usecases.PokemonListActionPlannerInterface
 
-interface EventControllerInterFace {
+interface EventControllerInterface {
     suspend fun event(event: Event)
 }
 
 // 全てのアクションプランナーを持つ必要性がある
-internal class EventController(private val pokemonListActionPlanner: PokemonListActionPlanner): EventControllerInterFace {
+internal class EventController(private val pokemonListActionPlanner: PokemonListActionPlannerInterface): EventControllerInterface {
     override suspend fun event(event: Event) {
         pokemonListActionPlanner.getPokemonList()
     }

@@ -1,8 +1,8 @@
 package com.example.stateholder.usecases.actionplan
 
-import com.example.stateholder.entities.AlterCreatorInterFace
+import com.example.stateholder.entities.AlterCreatorInterface
 
 interface ActionPlan {
-    val alterCreator: AlterCreatorInterFace
+    val alterCreator: AlterCreatorInterface
     suspend operator fun invoke()
 }
