@@ -1,0 +1,5 @@
+package com.example.stateholder.usecases
+
+interface StateRecipientInterFace
+
+class StateRecipient: StateDispatcherInterFace

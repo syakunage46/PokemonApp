@@ -1,0 +1,3 @@
+package com.example.stateholder.interfaseadapters
+
+interface ActionRepositoryDataSource

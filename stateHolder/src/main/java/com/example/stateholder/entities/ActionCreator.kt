@@ -1,0 +1,5 @@
+package com.example.stateholder.entities
+
+interface ActionCreatorInterFace
+
+class ActionCreator: ActionCreatorInterFace

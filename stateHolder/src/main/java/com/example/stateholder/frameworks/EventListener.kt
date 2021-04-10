@@ -1,0 +1,5 @@
+package com.example.stateholder.frameworks
+
+interface EventListenerInterface
+
+class EventListener: EventListenerInterface

@@ -1,0 +1,8 @@
+package com.example.stateholder.frameworks
+
+import android.app.Application
+import com.example.stateholder.interfaseadapters.ActionRepositoryDataSource
+
+interface ExternalDataSourceInterFace: ActionRepositoryDataSource
+
+internal class ExternalDataSource(app: Application): ExternalDataSourceInterFace

@@ -1,0 +1,7 @@
+package com.example.stateholder.interfaseadapters
+
+import com.example.stateholder.usecases.ActionDataProvider
+
+internal interface ActionRepositoryInterFace: ActionDataProvider
+
+internal class ActionRepository: ActionRepositoryInterFace
