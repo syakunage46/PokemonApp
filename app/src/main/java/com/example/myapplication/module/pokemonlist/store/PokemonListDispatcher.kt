@@ -6,7 +6,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
 class PokemonListDispatcher(override val actionFlow: Flow<PokemonListActionType>,
-                            private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default,
+                            private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default
 )
     : Dispatcher<PokemonListActionType, PokemonListState>{
 

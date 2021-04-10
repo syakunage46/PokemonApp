@@ -1,3 +1,7 @@
 package com.example.stateholder.entities
 
-interface AlterStateReceiver
+import kotlinx.coroutines.flow.Flow
+
+interface AlterStateReceiver {
+    val alterFlow: Flow<Alter>
+}

@@ -3,21 +3,21 @@ package com.example.stateholder.interfaseadapters
 import com.example.stateholder.entities.Alter
 import com.example.stateholder.entities.State
 import com.example.stateholder.usecases.StateRecipient
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
-internal interface StateStoreInterFace<StateType: State>: StateRecipient {
-    val stateFLow: Flow<StateType>
-    val state: StateType?
+interface StateStoreInterFace: StateRecipient {
+    val stateFLow: StateFlow<State>
+    val state: State
 }
 
-internal class StateStore<StateType: State>(initialState: StateType, alterFlow: Flow<Alter<StateType>>): StateStoreInterFace<StateType> {
-    private val _stateFlow = alterFlow.map { _state = it(state); return@map state}
-    override val stateFLow: Flow<StateType>
-        get() = _stateFlow.filterNotNull()
+internal class StateStore(initialState: State): StateStoreInterFace {
+    private val _stateFlow = MutableStateFlow(initialState)
+    override val stateFLow: StateFlow<State>
+        get() = _stateFlow
+    override val state: State
+        get() = stateFLow.value
 
-    private var _state: StateType = initialState
-    override val state: StateType
-        get() = _state
+    override suspend fun dispatch(alter: Alter) {
+        _stateFlow.emit(alter(state))
+    }
 }
