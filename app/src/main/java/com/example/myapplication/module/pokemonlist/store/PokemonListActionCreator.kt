@@ -53,6 +53,6 @@ class PokemonListActionCreator(private val useCases: PokemonRepositoryUseCases,
     }
 
     companion object {
-        const val REQUEST_ITEM_COUNT = 12
+        const val REQUEST_ITEM_COUNT = 15
     }
 }

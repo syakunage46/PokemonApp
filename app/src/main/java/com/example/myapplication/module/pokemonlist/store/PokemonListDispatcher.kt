@@ -1,12 +1,11 @@
 package com.example.myapplication.module.pokemonlist.store
 
 import android.util.Log
-import com.example.myapplication.flux.ActionCreator
-import com.example.myapplication.flux.Dispatcher
+import com.example.myapplication.flux.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-class PokemonListDispatcher(override val actionCreator: ActionCreator<PokemonListActionType, *>,
+class PokemonListDispatcher(override val actionFlow: Flow<PokemonListActionType>,
                             private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default,
 )
     : Dispatcher<PokemonListActionType, PokemonListState>{
@@ -17,18 +16,18 @@ class PokemonListDispatcher(override val actionCreator: ActionCreator<PokemonLis
     private val job = SupervisorJob()
     private val scope = CoroutineScope(coroutineDispatcher + job + exceptionHandler)
 
-    private val _state = MutableStateFlow<((PokemonListState) -> PokemonListState)?>(null)
-    override val state: Flow<(PokemonListState) -> PokemonListState> = _state.filterNotNull()
+    private val _state = MutableStateFlow<Alter<PokemonListState>?>(null)
+    override val alterFlow: Flow<Alter<PokemonListState>> = _state.filterNotNull()
 
     init {
         scope.launch {
-            actionCreator.actionFlow.collect { action ->
+            actionFlow.collect { action ->
                 when(action) {
                     is PokemonListActionType.LoadSuccess -> {
                         _state.emit {
                             it.pokemonList = action.pokemonDataList
                             it.isLoading = false
-                            return@emit it
+                            it
                         }
                     }
                     is PokemonListActionType.AdditionalLoadSuccess -> {
