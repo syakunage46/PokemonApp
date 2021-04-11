@@ -10,6 +10,6 @@ interface PokemonListActionPlannerInterface: ActionPlannerInterface {
     val getPokemonList: GetPokemonList
 }
 
-internal class PokemonListActionPlanner(alterCreatorInterFace: AlterCreatorInterface): PokemonListActionPlannerInterface {
-    override val getPokemonList: GetPokemonList = GetPokemonListInteractor(alterCreatorInterFace)
+internal class PokemonListActionPlanner(alterCreatorInterFace: AlterCreatorInterface, actionDataProvider: ActionDataProvider): PokemonListActionPlannerInterface {
+    override val getPokemonList: GetPokemonList = GetPokemonListInteractor(alterCreatorInterFace, actionDataProvider)
 }

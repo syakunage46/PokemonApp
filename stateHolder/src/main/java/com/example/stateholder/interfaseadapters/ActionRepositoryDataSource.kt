@@ -1,3 +1,7 @@
 package com.example.stateholder.interfaseadapters
 
-interface ActionRepositoryDataSource
+import com.example.pokemonrepository.repository.PokemonRepository
+
+interface ActionRepositoryDataSource {
+    val pokemonRepository: PokemonRepository
+}

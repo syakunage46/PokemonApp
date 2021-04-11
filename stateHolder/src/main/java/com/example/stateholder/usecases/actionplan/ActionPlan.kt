@@ -4,5 +4,4 @@ import com.example.stateholder.entities.AlterCreatorInterface
 
 interface ActionPlan {
     val alterCreator: AlterCreatorInterface
-    suspend operator fun invoke()
 }

@@ -1,0 +1,5 @@
+package com.example.myapplication.frameworks
+
+interface StateListenerInterface
+
+class StateListener: StateListenerInterface

@@ -1,3 +1,7 @@
 package com.example.stateholder.usecases
 
-internal interface ActionDataProvider
+import com.example.stateholder.data.PokemonData
+
+interface ActionDataProvider {
+    suspend fun getPokemonList(limit: Int, offset: Int): List<PokemonData>
+}

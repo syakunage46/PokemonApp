@@ -2,7 +2,6 @@ package com.example.stateholder
 
 import android.app.Application
 import com.example.stateholder.di.DaggerStateGatewayComponent
-import com.example.stateholder.di.NonWildcardFlow
 import com.example.stateholder.frameworks.EventListenerInterface
 import com.example.stateholder.frameworks.StateCasterInterface
 import com.example.stateholder.interfaseadapters.Event

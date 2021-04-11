@@ -18,6 +18,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
+        ActionDataProviderModule::class,
         ActionPlannerModule::class,
         AlterCreatorModule::class,
         EventControllerModule::class,
