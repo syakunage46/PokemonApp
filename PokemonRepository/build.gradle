@@ -44,6 +44,7 @@ dependencies {
     // coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutiones_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutiones_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutiones_version"
 
     // Room
     implementation "androidx.room:room-runtime:$room_version"
@@ -68,4 +69,7 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Mockito
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_version"
 }

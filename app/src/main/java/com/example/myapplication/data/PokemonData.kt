@@ -12,6 +12,11 @@ data class PokemonData(
     val flavorText: String,
     val frontImageUrl: String
 ) {
+
+    fun a(){
+
+    }
+
     companion object {
         fun from(pokemonRepositoryItem: PokemonRepositoryItem): PokemonData {
             return PokemonData(
