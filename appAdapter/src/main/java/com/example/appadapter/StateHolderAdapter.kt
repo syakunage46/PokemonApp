@@ -1,0 +1,5 @@
+package com.example.appadapter
+
+interface StateHolderAdapterInterface
+
+class StateHolderAdapter: StateHolderAdapterInterface
