@@ -1,30 +1,27 @@
 package com.example.appadapter
 
 import android.app.Application
-import com.example.appadapter.adapter.EventAdapterInterface
-import com.example.appadapter.adapter.StateAdapterInterface
-import com.example.appadapter.di.DaggerAppAdapterGatewayComponent
-import com.example.myapplication.frameworks.EventCasterInterface
+import com.example.core.event.Event
+import com.example.stateholder.entities.State
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface AppAdapterGatewayInterface {
-    val eventAdapter: EventAdapterInterface
-    val stateAdapter: StateAdapterInterface
+    val stateFlow: Flow<State>
 }
 
 class AppAdapterGateway @Inject constructor(
-    override val eventAdapter: EventAdapterInterface,
-    override val stateAdapter: StateAdapterInterface
+    override val stateFlow: Flow<State>
 ) : AppAdapterGatewayInterface {
     companion object {
         @Volatile
         private var instance: AppAdapterGatewayInterface? = null
 
-        private fun create(app: Application, eventCaster: EventCasterInterface): AppAdapterGatewayInterface {
-            return DaggerAppAdapterGatewayComponent.factory().create(app, eventCaster).appAdapterGateway()
+        private fun create(app: Application, eventFlow: Flow<Event>): AppAdapterGatewayInterface {
+            return DaggerAppAdapterGatewayComponent.factory().create(app, eventFlow).appAdapterGateway()
         }
 
-        fun getInstance(app: Application, eventCaster: EventCasterInterface): AppAdapterGatewayInterface =
-            (instance ?: create(app, eventCaster)).also { instance = it }
+        fun getInstance(app: Application, eventFlow: Flow<Event>): AppAdapterGatewayInterface =
+            (instance ?: create(app, eventFlow)).also { instance = it }
     }
 }

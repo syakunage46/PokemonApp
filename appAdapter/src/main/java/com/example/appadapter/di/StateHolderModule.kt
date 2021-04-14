@@ -1,7 +1,7 @@
 package com.example.appadapter.di
 
 import android.app.Application
-import com.example.appadapter.adapter.EventAdapterInterface
+import com.example.core.state.State
 import com.example.stateholder.StateGateway
 import com.example.stateholder.StateGatewayInterface
 import com.example.stateholder.frameworks.StateCaster
@@ -16,16 +16,13 @@ typealias NonWildcardFlow<T> = Flow<@JvmSuppressWildcards T>
 
 @Module
 class StateHolderModule {
-    @Singleton
-    @Provides
-    fun provideEventFlow(eventAdapter: EventAdapterInterface) : NonWildcardFlow<Event>
-            = eventAdapter.eventFlow
+
     @Singleton
     @Provides
     fun provideStateGateway(app: Application, eventFlow: NonWildcardFlow<Event>): StateGatewayInterface
             = StateGateway.getInstance(app, eventFlow)
     @Singleton
     @Provides
-    fun provideStateCaster(stateGateway: StateGatewayInterface): StateCasterInterface
-            = stateGateway.stateCaster
+    fun provideStateFlow(stateGateway: StateGatewayInterface): NonWildcardFlow<State>
+            = stateGateway.stateCaster.stateFLow
 }
