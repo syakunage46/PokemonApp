@@ -3,6 +3,8 @@ package com.example.myapplication.frameworks
 import com.example.core.state.State
 import kotlinx.coroutines.flow.Flow
 
-interface StateListenerInterface
+interface StateListenerInterface {
+    val stateFlow: Flow<State>
+}
 
-class StateListener(stateFlow: Flow<State>): StateListenerInterface
+class StateListener(override val stateFlow: Flow<State>): StateListenerInterface

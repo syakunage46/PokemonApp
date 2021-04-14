@@ -64,6 +64,10 @@ dependencies {
     // Fragment KTX
     implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
 
+    // LiveData KTX
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_ktx_version"
+
+    // LifeCycleExtensions
     implementation "android.arch.lifecycle:livedata:$life_cycle_extensions_version"
     implementation "android.arch.lifecycle:extensions:$life_cycle_extensions_version"
 

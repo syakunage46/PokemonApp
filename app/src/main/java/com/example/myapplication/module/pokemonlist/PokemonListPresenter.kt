@@ -1,48 +1,34 @@
 package com.example.myapplication.module.pokemonlist
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.pokemon.PokemonData
-import com.example.myapplication.databinding.PokemonListItemBinding
+import com.example.core.pokemon.PokemonStateElement
+import com.example.core.state.State
+import com.example.myapplication.frameworks.StateListener
+import com.example.myapplication.frameworks.StateListenerInterface
+import com.example.myapplication.module.pokemonlist.presenter.PokemonListAdapter
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapNotNull
 
-object PokemonListPresenter {
+interface PokemonListPresenterInterface {
+    val pokemonListDataFlow: Flow<List<PokemonData>>
+    val isLoadingFlow: Flow<Boolean>
+    val errorFlow: Flow<Throwable?>
+}
 
-    @BindingAdapter("bindPokemonList")
-    @JvmStatic
-    fun RecyclerView.bindItems(items: List<PokemonData>?) {
-        items?.let {
-            val adapter = adapter as PokemonListAdapter
-            adapter.submitList(it)
-        }
-    }
+class PokemonListPresenter(private val pokemonStateFlow: Flow<PokemonStateElement>) : PokemonListPresenterInterface {
+    override val pokemonListDataFlow: Flow<List<PokemonData>> = pokemonStateFlow.map{ it.pokemonDataList }
+    override val isLoadingFlow: Flow<Boolean> = pokemonStateFlow.map{ it.isLoading }
+    override val errorFlow: Flow<Throwable?> = pokemonStateFlow.map{ it.error }
+}
 
-    class PokemonListAdapter: ListAdapter<PokemonData, PokemonListAdapter.PokemonListViewHolder>(PokemonDataDiffCallback()){
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PokemonListViewHolder.from(parent)
-
-        override fun onBindViewHolder(holder: PokemonListViewHolder, position: Int) = holder.bind(getItem(position))
-
-        class PokemonListViewHolder(private val binding: PokemonListItemBinding): RecyclerView.ViewHolder(binding.root) {
-
-            fun bind(item: PokemonData) {
-                binding.pokemonData = item
-                binding.executePendingBindings()
-            }
-
-            companion object {
-                fun from(parent: ViewGroup): PokemonListViewHolder {
-                    val layoutInflater = LayoutInflater.from(parent.context)
-                    val binding = PokemonListItemBinding.inflate(layoutInflater, parent, false)
-                    return PokemonListViewHolder(binding)
-                }
-            }
-        }
-    }
-    class PokemonDataDiffCallback : DiffUtil.ItemCallback<PokemonData>() {
-        override fun areItemsTheSame(oldItem: PokemonData, newItem: PokemonData) = oldItem.id == newItem.id
-        override fun areContentsTheSame(oldItem: PokemonData, newItem: PokemonData) = oldItem == newItem
+@BindingAdapter("bindPokemonList")
+fun RecyclerView.bindItems(items: List<PokemonData>?) {
+    items?.let {
+        val adapter = adapter as PokemonListAdapter
+        adapter.submitList(it)
     }
 }
