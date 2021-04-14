@@ -1,6 +1,6 @@
 package com.example.stateholder.di
 
-import com.example.stateholder.entities.AppState
+import com.example.stateholder.entities.State
 import com.example.stateholder.interfaseadapters.StateStore
 import com.example.stateholder.interfaseadapters.StateStoreInterface
 import com.example.stateholder.usecases.StateRecipient
@@ -14,7 +14,7 @@ class StateStoreModule {
     @Singleton
     @Provides
     fun provideStateStore(): StateStoreInterface
-            = StateStore(AppState())
+            = StateStore(State())
 
     @Singleton
     @Provides

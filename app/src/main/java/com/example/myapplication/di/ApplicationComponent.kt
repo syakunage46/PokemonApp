@@ -11,7 +11,9 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AndroidSupportInjectionModule::class,
+        AppAdapterModule::class,
         ApplicationModule::class,
+        FrameworksModule::class,
         MainActivityModule::class,
         PokemonListFragmentModule::class,
         PokemonListModule::class]

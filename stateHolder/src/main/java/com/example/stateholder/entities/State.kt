@@ -1,5 +1,7 @@
 package com.example.stateholder.entities
 
-interface State
+import com.example.stateholder.data.PokemonData
 
-class AppState: State
+data class State(
+    val pokemonDataList: List<PokemonData> = emptyList()
+)

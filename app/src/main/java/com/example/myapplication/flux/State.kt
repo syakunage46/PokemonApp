@@ -1,3 +1,5 @@
 package com.example.myapplication.flux
 
-interface State {}
+import com.example.myapplication.data.PokemonData
+
+data class State(val pokemonDataList: List<PokemonData>)
