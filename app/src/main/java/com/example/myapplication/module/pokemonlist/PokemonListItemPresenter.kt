@@ -17,7 +17,7 @@ object PokemonListItemPresenter {
     @BindingAdapter("pokemonNumber")
     @JvmStatic
     fun TextView.setPokemonNumber(pokemonData: PokemonData) {
-        text = resources.getString(R.string.pokemon_number_format, pokemonData.order);
+        text = resources.getString(R.string.pokemon_number_format, pokemonData.id);
     }
 
     @BindingAdapter("pokemonName")

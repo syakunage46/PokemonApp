@@ -11,7 +11,10 @@ interface EventControllerInterface {
 // 全てのアクションプランナーを持つ必要性がある
 internal class EventController(private val pokemonListActionPlanner: PokemonListActionPlannerInterface): EventControllerInterface {
     override suspend fun event(event: Event) {
-        Log.d("EventController", "event: $event")
-        pokemonListActionPlanner.getPokemonList(10, 0)
+        pokemonListActionPlanner.getPokemonList(REQUEST_ITEM_COUNT, 0)
+    }
+
+    companion object {
+        const val REQUEST_ITEM_COUNT = 15
     }
 }
