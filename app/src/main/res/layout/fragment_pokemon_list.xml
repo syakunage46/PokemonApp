@@ -8,7 +8,7 @@
 
         <variable
             name="controller"
-            type="com.example.myapplication.module.pokemonlist.PokemonListController" />
+            type="com.example.myapplication.module.pokemonlist.PokemonListControllerInterface" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

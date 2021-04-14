@@ -1,6 +1,6 @@
 package com.example.myapplication.frameworks
 
-import com.example.myapplication.flux.State
+import com.example.core.state.State
 import kotlinx.coroutines.flow.Flow
 
 interface StateListenerInterface

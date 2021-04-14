@@ -1,8 +1,9 @@
 package com.example.appadapter
 
 import android.app.Application
+import com.example.appadapter.di.DaggerAppAdapterGatewayComponent
 import com.example.core.event.Event
-import com.example.stateholder.entities.State
+import com.example.core.state.State
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

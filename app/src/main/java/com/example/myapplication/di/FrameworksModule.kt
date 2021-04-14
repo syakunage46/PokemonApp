@@ -1,7 +1,8 @@
 package com.example.myapplication.di
 
 import com.example.appadapter.AppAdapterGatewayInterface
-import com.example.myapplication.flux.State
+import com.example.core.event.Event
+import com.example.core.state.State
 import com.example.myapplication.frameworks.EventCaster
 import com.example.myapplication.frameworks.EventCasterInterface
 import com.example.myapplication.frameworks.StateListener
@@ -21,8 +22,12 @@ class FrameworksModule{
             = EventCaster()
     @Singleton
     @Provides
+    fun provideEventFLow(eventCaster: EventCasterInterface): NonWildcardFlow<Event>
+            = eventCaster.eventFLow
+    @Singleton
+    @Provides
     fun provideStateFlow(appAdapter: AppAdapterGatewayInterface): NonWildcardFlow<State>
-            = appAdapter.stateAdapter.stateFlow
+            = appAdapter.stateFlow
     @Singleton
     @Provides
     fun provideStateListener(stateFlow: NonWildcardFlow<State>): StateListenerInterface

@@ -1,7 +1,7 @@
 package com.example.stateholder.frameworks
 
 import android.util.Log
-import com.example.stateholder.interfaseadapters.Event
+import com.example.core.event.Event
 import com.example.stateholder.interfaseadapters.EventControllerInterface
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow

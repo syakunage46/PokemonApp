@@ -1,18 +1,10 @@
 package com.example.stateholder.di
 
 import android.app.Application
-import com.example.stateholder.StateGateway
+import com.example.core.event.Event
 import com.example.stateholder.StateGatewayInterface
-import com.example.stateholder.entities.AlterCreatorInterface
-import com.example.stateholder.frameworks.EventListenerInterface
-import com.example.stateholder.frameworks.StateCasterInterface
-import com.example.stateholder.interfaseadapters.Event
-import com.example.stateholder.usecases.PokemonListActionPlanner
-import com.example.stateholder.usecases.PokemonListActionPlannerInterface
 import dagger.BindsInstance
 import dagger.Component
-import dagger.Module
-import dagger.Provides
 import javax.inject.Singleton
 
 @Singleton

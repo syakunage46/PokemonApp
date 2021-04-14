@@ -1,6 +1,6 @@
 package com.example.stateholder.entities
 
-import com.example.stateholder.data.PokemonData
+import com.example.core.pokemon.PokemonData
 
 interface Action
 

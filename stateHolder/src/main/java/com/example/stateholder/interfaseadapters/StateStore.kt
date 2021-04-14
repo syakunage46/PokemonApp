@@ -1,7 +1,7 @@
 package com.example.stateholder.interfaseadapters
 
+import com.example.core.state.State
 import com.example.stateholder.entities.Alter
-import com.example.stateholder.entities.State
 import com.example.stateholder.usecases.StateRecipient
 import kotlinx.coroutines.flow.*
 

@@ -1,6 +1,6 @@
 package com.example.stateholder.di
 
-import com.example.stateholder.entities.State
+import com.example.core.state.State
 import com.example.stateholder.interfaseadapters.StateStore
 import com.example.stateholder.interfaseadapters.StateStoreInterface
 import com.example.stateholder.usecases.StateRecipient

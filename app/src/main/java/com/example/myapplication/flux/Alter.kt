@@ -1,5 +1,6 @@
 package com.example.myapplication.flux
 
+import com.example.core.state.State
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class Alter<StateType>(private val alter: (StateType) -> StateType){

@@ -1,5 +1,6 @@
 package com.example.stateholder.interfaseadapters
 
+import com.example.core.event.Event
 import com.example.stateholder.usecases.PokemonListActionPlannerInterface
 
 interface EventControllerInterface {

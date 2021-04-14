@@ -1,6 +1,6 @@
 package com.example.stateholder.frameworks
 
-import com.example.stateholder.entities.State
+import com.example.core.state.State
 import com.example.stateholder.interfaseadapters.StateStoreInterface
 import kotlinx.coroutines.flow.StateFlow
 

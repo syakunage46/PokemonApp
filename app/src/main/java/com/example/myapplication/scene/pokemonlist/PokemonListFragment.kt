@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.myapplication.controller.InfiniteScrollListener
 import com.example.myapplication.databinding.FragmentPokemonListBinding
-import com.example.myapplication.module.pokemonlist.PokemonListController
+import com.example.myapplication.module.pokemonlist.PokemonListControllerInterface
 import com.example.myapplication.module.pokemonlist.PokemonListPresenter.PokemonListAdapter
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.FlowPreview
@@ -19,7 +19,7 @@ class PokemonListFragment: DaggerFragment() {
     lateinit var pokemonListAdapter: PokemonListAdapter
 
     @Inject
-    lateinit var controller: PokemonListController
+    lateinit var controller: PokemonListControllerInterface
 
     lateinit var scrollListener: InfiniteScrollListener
 
