@@ -1,5 +1,6 @@
 package com.example.pokemonrepository.usecase
 
+import android.util.Log
 import com.example.pokemonrepository.data.PokemonRepositoryItem
 import com.example.pokemonrepository.repository.datasource.PokemonDataSource
 import com.example.pokemonrepository.repository.datasource.local.PokemonLocalDataSource
@@ -11,6 +12,7 @@ interface GetPokemonList {
 
 class GetPokemonListInteractor (private val pokemonDataSource: PokemonDataSource): GetPokemonList {
     override suspend operator fun invoke(limit: Int, offset: Int): List<PokemonRepositoryItem> {
+
         var pokemonList: List<PokemonRepositoryItem> = pokemonDataSource.local.getPokemonList(limit, offset)
         return if (pokemonList.size >= limit) {
             pokemonList

@@ -16,7 +16,7 @@ import javax.inject.Singleton
         EventControllerModule::class,
         EventListenerModule::class,
         StateCasterModule::class,
-        StateDispatcherModule::class,
+        AlterDispatcherModule::class,
         StateGatewayModule::class,
         StateStoreModule::class]
 )
