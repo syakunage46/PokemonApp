@@ -8,7 +8,7 @@ interface GetPokemonList: ActionPlan {
     suspend operator fun invoke(limit: Int, offset: Int)
 }
 
-class GetPokemonListInteractor(override val alterCreator: AlterCreatorInterface, private val actionDataProvider: ActionDataProvider) : GetPokemonList {
+class GetPokemonListInteractor(private val alterCreator: AlterCreatorInterface, private val actionDataProvider: ActionDataProvider) : GetPokemonList {
     override suspend operator fun invoke(limit: Int, offset: Int){
         alterCreator.create(PokemonAction.GetList(actionDataProvider.getPokemonList(limit, offset)))
     }
