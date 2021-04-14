@@ -5,7 +5,7 @@
 
     <data>
         <import type="java.util.List" />
-        <import type="com.example.myapplication.data.PokemonData"/>
+        <import type="com.example.core.pokemon.PokemonData"/>
 
         <variable
             name="pokemonDataList"

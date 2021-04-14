@@ -6,7 +6,7 @@
     <data>
         <variable
             name="pokemonData"
-            type="com.example.myapplication.data.PokemonData" />
+            type="com.example.core.pokemon.PokemonData" />
     </data>
 
     <androidx.cardview.widget.CardView

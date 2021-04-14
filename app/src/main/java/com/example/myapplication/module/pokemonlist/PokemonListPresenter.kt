@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.data.PokemonData
+import com.example.core.pokemon.PokemonData
 import com.example.myapplication.databinding.PokemonListItemBinding
 
 object PokemonListPresenter {
