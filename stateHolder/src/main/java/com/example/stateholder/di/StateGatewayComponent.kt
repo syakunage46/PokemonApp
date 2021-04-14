@@ -2,6 +2,7 @@ package com.example.stateholder.di
 
 import android.app.Application
 import com.example.core.event.Event
+import com.example.core.util.NonWildcardFlow
 import com.example.stateholder.StateGatewayInterface
 import dagger.BindsInstance
 import dagger.Component
