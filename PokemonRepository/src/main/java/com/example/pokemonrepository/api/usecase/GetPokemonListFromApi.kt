@@ -13,7 +13,7 @@ class GetPokemonListFromApiInteractor (private val apiConnector: PokeApiConnecto
     override suspend operator fun invoke(limit: Int, offset: Int): List<PokemonRepositoryItem> {
         return withContext(dispatcher) {
             apiConnector.getPokemonListAsync(limit, offset).results.map {
-                async { getPokemonProperty(it.name) }
+                async { getPokemonProperty(pokeApiIDRegex.find(it.url)?.groupValues?.get(1) ?: it.name) }
             }.map {
                 it.await()
             }
@@ -28,5 +28,9 @@ class GetPokemonListFromApiInteractor (private val apiConnector: PokeApiConnecto
             val speciesResponse = speciesResponseAsync.await()
             return@withContext pokemonResponse.toPokemonRepositoryItem(speciesResponse)
         }
+    }
+
+    companion object {
+        val pokeApiIDRegex = Regex("""(\d+)/$""")
     }
 }
