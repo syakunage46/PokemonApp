@@ -1,3 +1,4 @@
+include ':stateFlow'
 include ':core'
 include ':appAdapter'
 include ':stateHolder'

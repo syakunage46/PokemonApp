@@ -5,6 +5,7 @@
       <module name="My_Application.app" target="1.8" />
       <module name="My_Application.appAdapter" target="1.8" />
       <module name="My_Application.PokemonRepository" target="1.8" />
+      <module name="My_Application.stateFlow" target="1.8" />
       <module name="My_Application.stateHolder" target="1.8" />
     </bytecodeTargetLevel>
   </component>
