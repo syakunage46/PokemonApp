@@ -3,6 +3,7 @@ package com.example.myapplication.di
 import com.example.appadapter.AppAdapterGatewayInterface
 import com.example.core.event.Event
 import com.example.core.state.State
+import com.example.core.util.NonWildcardFlow
 import com.example.myapplication.frameworks.EventCaster
 import com.example.myapplication.frameworks.EventCasterInterface
 import com.example.myapplication.frameworks.StateListener
@@ -11,8 +12,6 @@ import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Singleton
-
-typealias NonWildcardFlow<T> = Flow<@JvmSuppressWildcards T>
 
 @Module
 class FrameworksModule{
