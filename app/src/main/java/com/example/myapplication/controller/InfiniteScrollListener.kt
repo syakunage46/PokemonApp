@@ -5,31 +5,22 @@ import androidx.recyclerview.widget.RecyclerView
 
 class InfiniteScrollListener(private val layoutManager: LinearLayoutManager, val callback: () -> Unit) : RecyclerView.OnScrollListener() {
 
-    private var previousTotal = 0
-    private var loading = true
-    private var visibleThreshold = 2
-    private var firstVisibleItem = 0
-    private var visibleItemCount = 0
-    private var totalItemCount = 0
+    private var loading = false
+    private var prevItemCount = 0
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
+        if (dy <= 0)  return
 
-        if (dy > 0) {
-            visibleItemCount = recyclerView.childCount;
-            totalItemCount = layoutManager.itemCount;
-            firstVisibleItem = layoutManager.findFirstVisibleItemPosition();
+        val totalItemCount = layoutManager.itemCount
+        val lastItemPosition = layoutManager.findLastVisibleItemPosition() + 1
 
-            if (loading) {
-                if (totalItemCount != previousTotal) {
-                    loading = false
-                    previousTotal = totalItemCount
-                }
-            }
-            if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold )) {
-                callback()
-                loading = true
-            }
+        if (loading && totalItemCount != prevItemCount) loading = false
+
+        if (!loading && totalItemCount == lastItemPosition) {
+            loading = true
+            prevItemCount = totalItemCount
+            callback()
         }
     }
 }
