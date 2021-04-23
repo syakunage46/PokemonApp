@@ -1,4 +1,4 @@
-package com.example.myapplication.controller
+package com.example.myapplication.interface_adapters.controller
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView

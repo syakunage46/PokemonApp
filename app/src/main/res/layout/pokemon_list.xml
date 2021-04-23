@@ -17,7 +17,7 @@
 
         <variable
             name="delegate"
-            type="com.example.myapplication.controller.SwipeRefreshDelegate" />
+            type="com.example.myapplication.interface_adapters.controller.SwipeRefreshDelegate" />
     </data>
 
     <merge>

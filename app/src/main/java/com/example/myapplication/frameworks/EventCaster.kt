@@ -1,7 +1,7 @@
 package com.example.myapplication.frameworks
 
 import com.example.core.event.Event
-import com.example.myapplication.controller.EventReceiverInterface
+import com.example.myapplication.interface_adapters.controller.EventReceiverInterface
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull

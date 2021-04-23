@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.myapplication.scene.pokemonlist.PokemonListViewModel" />
+            type="com.example.myapplication.scene.pokemonlist.PokemonListViewModelAbstract" />
 
         <variable
             name="controller"

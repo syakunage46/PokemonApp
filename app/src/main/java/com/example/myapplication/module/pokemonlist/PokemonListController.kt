@@ -1,8 +1,7 @@
 package com.example.myapplication.module.pokemonlist
 
 import com.example.core.pokemon.PokemonEvent
-import com.example.myapplication.controller.SwipeRefreshDelegate
-import com.example.myapplication.frameworks.EventCaster
+import com.example.myapplication.interface_adapters.controller.SwipeRefreshDelegate
 import com.example.myapplication.frameworks.EventCasterInterface
 
 interface PokemonListControllerInterface: SwipeRefreshDelegate {

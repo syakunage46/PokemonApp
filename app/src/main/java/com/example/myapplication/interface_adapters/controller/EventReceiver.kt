@@ -1,4 +1,4 @@
-package com.example.myapplication.controller
+package com.example.myapplication.interface_adapters.controller
 
 import com.example.core.event.Event
 

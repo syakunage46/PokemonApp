@@ -7,7 +7,6 @@ import com.example.myapplication.module.pokemonlist.PokemonListControllerInterfa
 import com.example.myapplication.module.pokemonlist.PokemonListController
 import com.example.myapplication.module.pokemonlist.PokemonListPresenter
 import com.example.myapplication.module.pokemonlist.PokemonListPresenterInterface
-import com.example.myapplication.scene.pokemonlist.PokemonListViewModelFactory
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.flow.mapNotNull
@@ -31,9 +30,4 @@ class PokemonListModule {
     @Provides
     fun providePokemonListPresenter(pokemonStateElementFlow: NonWildcardFlow<PokemonStateElement>): PokemonListPresenterInterface
             = PokemonListPresenter(pokemonStateElementFlow)
-
-    @Singleton
-    @Provides
-    fun providePokemonListViewModelFactory(pokemonListPresenterInterface: PokemonListPresenterInterface)
-            = PokemonListViewModelFactory(pokemonListPresenterInterface)
 }

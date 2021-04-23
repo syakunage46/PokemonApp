@@ -9,15 +9,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.R
-import com.example.myapplication.controller.InfiniteScrollListener
+import com.example.myapplication.interface_adapters.controller.InfiniteScrollListener
 import com.example.myapplication.databinding.FragmentPokemonListBinding
+import com.example.myapplication.di.ViewModelFactory
 import com.example.myapplication.module.pokemonlist.PokemonListControllerInterface
 import com.example.myapplication.module.pokemonlist.presenter.PokemonListAdapter
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
-@FlowPreview
 class PokemonListFragment: DaggerFragment() {
 
     lateinit var binding: FragmentPokemonListBinding
@@ -27,9 +27,9 @@ class PokemonListFragment: DaggerFragment() {
     lateinit var controller: PokemonListControllerInterface
 
     @Inject
-    lateinit var viewModelFactory: PokemonListViewModelFactory
+    lateinit var viewModelFactory: ViewModelFactory
 
-    val viewModel: PokemonListViewModel by viewModels{ viewModelFactory }
+    private val viewModel: PokemonListViewModelAbstract by viewModels{ viewModelFactory }
     lateinit var scrollListener: InfiniteScrollListener
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

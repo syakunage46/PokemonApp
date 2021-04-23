@@ -3,6 +3,7 @@ package com.example.appadapter.di
 import com.example.appadapter.AppAdapterGateway
 import com.example.appadapter.AppAdapterGatewayInterface
 import com.example.core.state.State
+import com.example.core.util.NonWildcardFlow
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.flow.Flow

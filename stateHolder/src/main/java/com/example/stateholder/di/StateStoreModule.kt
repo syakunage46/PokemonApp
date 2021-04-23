@@ -14,7 +14,7 @@ class StateStoreModule {
     @Singleton
     @Provides
     fun provideStateStore(): StateStoreInterface
-            = StateStore(State())
+            = StateStore(State(emptyMap()))
 
     @Singleton
     @Provides
