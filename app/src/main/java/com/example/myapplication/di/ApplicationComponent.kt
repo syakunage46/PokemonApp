@@ -16,7 +16,8 @@ import javax.inject.Singleton
         FrameworksModule::class,
         MainActivityModule::class,
         PokemonListFragmentModule::class,
-        PokemonListModule::class]
+        PokemonListModule::class,
+        StateJunctionModule::class]
 )
 interface ApplicationComponent: AndroidInjector<MyApplication> {
     @Component.Factory

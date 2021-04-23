@@ -26,10 +26,6 @@ class FrameworksModule{
             = eventCaster.eventFLow
     @Singleton
     @Provides
-    fun provideStateFlow(appAdapter: AppAdapterGatewayInterface): NonWildcardFlow<State>
-            = appAdapter.stateFlow
-    @Singleton
-    @Provides
-    fun provideStateListener(stateFlow: NonWildcardFlow<State>): StateListenerInterface
-            = StateListener(stateFlow)
+    fun provideStateListener(appAdapter: AppAdapterGatewayInterface): StateListenerInterface
+            = StateListener(appAdapter)
 }

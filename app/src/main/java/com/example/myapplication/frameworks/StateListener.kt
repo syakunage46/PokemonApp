@@ -1,10 +1,13 @@
 package com.example.myapplication.frameworks
 
-import com.example.core.state.State
-import kotlinx.coroutines.flow.Flow
+import com.example.appadapter.AppAdapterGatewayInterface
+import com.example.myapplication.interface_adapters.gateway.StateJunction
+import com.example.myapplication.interface_adapters.gateway.StateJunctionInterface
 
 interface StateListenerInterface {
-    val stateFlow: Flow<State>
+    val stateJunction: StateJunctionInterface
 }
 
-class StateListener(override val stateFlow: Flow<State>): StateListenerInterface
+class StateListener(appAdapter: AppAdapterGatewayInterface): StateListenerInterface {
+    override val stateJunction: StateJunctionInterface = StateJunction(appAdapter.stateFlow)
+}
