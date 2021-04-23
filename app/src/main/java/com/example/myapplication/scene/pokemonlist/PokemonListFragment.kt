@@ -13,7 +13,7 @@ import com.example.myapplication.interface_adapters.controller.InfiniteScrollLis
 import com.example.myapplication.databinding.FragmentPokemonListBinding
 import com.example.myapplication.di.ViewModelFactory
 import com.example.myapplication.module.pokemonlist.PokemonListControllerInterface
-import com.example.myapplication.module.pokemonlist.presenter.PokemonListAdapter
+import com.example.myapplication.module.pokemonlist.view.PokemonListAdapter
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 

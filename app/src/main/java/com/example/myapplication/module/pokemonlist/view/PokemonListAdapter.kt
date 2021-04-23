@@ -1,13 +1,13 @@
-package com.example.myapplication.module.pokemonlist.presenter
+package com.example.myapplication.module.pokemonlist.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.pokemon.PokemonData
 import com.example.myapplication.databinding.PokemonListItemBinding
-import com.example.myapplication.module.pokemonlist.PokemonListPresenter
 
 class PokemonListAdapter: ListAdapter<PokemonData, PokemonListAdapter.PokemonListViewHolder>(PokemonDataDiffCallback()){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PokemonListViewHolder.from(parent)
@@ -33,5 +33,13 @@ class PokemonListAdapter: ListAdapter<PokemonData, PokemonListAdapter.PokemonLis
     class PokemonDataDiffCallback : DiffUtil.ItemCallback<PokemonData>() {
         override fun areItemsTheSame(oldItem: PokemonData, newItem: PokemonData) = oldItem.id == newItem.id
         override fun areContentsTheSame(oldItem: PokemonData, newItem: PokemonData) = oldItem == newItem
+    }
+}
+
+@BindingAdapter("bindPokemonList")
+fun RecyclerView.bindItems(items: List<PokemonData>?) {
+    items?.let {
+        val adapter = adapter as PokemonListAdapter
+        adapter.submitList(it)
     }
 }

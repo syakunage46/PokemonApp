@@ -7,7 +7,7 @@ import com.example.myapplication.module.pokemonlist.PokemonListControllerInterfa
 import com.example.myapplication.module.pokemonlist.PokemonListController
 import com.example.myapplication.module.pokemonlist.PokemonListPresenter
 import com.example.myapplication.module.pokemonlist.PokemonListPresenterInterface
-import com.example.myapplication.module.pokemonlist.presenter.PokemonListAdapter
+import com.example.myapplication.module.pokemonlist.view.PokemonListAdapter
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.flow.mapNotNull

@@ -1,4 +1,4 @@
-package com.example.myapplication.module.pokemonlist
+package com.example.myapplication.module.pokemonlist.view
 
 import android.widget.ImageView
 import android.widget.TextView
