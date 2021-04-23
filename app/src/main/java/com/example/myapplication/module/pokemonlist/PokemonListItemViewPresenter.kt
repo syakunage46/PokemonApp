@@ -5,9 +5,9 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.core.pokemon.PokemonData
 import com.example.myapplication.R
-import com.example.myapplication.presenter.imageURL
+import com.example.myapplication.interface_adapters.presenter.imageURL
 
-object PokemonListItemPresenter {
+object PokemonListItemViewPresenter {
     @BindingAdapter("pokemonImage")
     @JvmStatic
     fun ImageView.setPokemonImage(pokemonData: PokemonData) {

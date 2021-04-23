@@ -3,5 +3,5 @@ package com.example.myapplication.interface_adapters.controller
 import com.example.core.event.Event
 
 interface EventReceiverInterface {
-    fun event(event: Event)
+    fun send(event: Event)
 }

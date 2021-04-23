@@ -2,8 +2,13 @@ package com.example.myapplication.frameworks
 
 import com.example.core.event.Event
 import com.example.myapplication.interface_adapters.controller.EventReceiverInterface
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.filterNotNull
 
 interface EventCasterInterface: EventReceiverInterface {
@@ -11,10 +16,14 @@ interface EventCasterInterface: EventReceiverInterface {
 }
 
 class EventCaster: EventCasterInterface {
-    private val _eventFlow = MutableStateFlow<Event?>(null)
-    override val eventFLow: Flow<Event> = _eventFlow.filterNotNull()
+    @ExperimentalCoroutinesApi
+    private val _eventFlow = BroadcastChannel<Event>(BUFFERED)
+    @ExperimentalCoroutinesApi
+    @FlowPreview
+    override val eventFLow: Flow<Event> = _eventFlow.asFlow()
 
-    override fun event(event: Event) {
-        _eventFlow.value = event
+    @ExperimentalCoroutinesApi
+    override fun send(event: Event) {
+        _eventFlow.offer(event)
     }
 }

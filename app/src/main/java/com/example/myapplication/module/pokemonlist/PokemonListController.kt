@@ -11,14 +11,14 @@ interface PokemonListControllerInterface: SwipeRefreshDelegate {
 
 class PokemonListController(private val eventCaster: EventCasterInterface): PokemonListControllerInterface {
     override fun onCreate() {
-        eventCaster.event(PokemonEvent.OnCreate())
+        eventCaster.send(PokemonEvent.OnCreate())
     }
 
     override fun onScrolledToEnd(offset: Int) {
-        eventCaster.event(PokemonEvent.OnScrolledToEnd(offset))
+        eventCaster.send(PokemonEvent.OnScrolledToEnd(offset))
     }
 
     override fun onSwipeRefresh() {
-        eventCaster.event(PokemonEvent.OnSwipeRefresh())
+        eventCaster.send(PokemonEvent.OnSwipeRefresh())
     }
 }

@@ -15,16 +15,17 @@ import com.example.myapplication.di.ViewModelFactory
 import com.example.myapplication.module.pokemonlist.PokemonListControllerInterface
 import com.example.myapplication.module.pokemonlist.presenter.PokemonListAdapter
 import dagger.android.support.DaggerFragment
-import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
 class PokemonListFragment: DaggerFragment() {
 
     lateinit var binding: FragmentPokemonListBinding
-    lateinit var pokemonListAdapter: PokemonListAdapter
 
     @Inject
     lateinit var controller: PokemonListControllerInterface
+
+    @Inject
+    lateinit var pokemonListAdapter: PokemonListAdapter
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -50,10 +51,6 @@ class PokemonListFragment: DaggerFragment() {
     }
 
     private fun bindRecyclerView() {
-        if (!::pokemonListAdapter.isInitialized){
-            pokemonListAdapter = PokemonListAdapter()
-        }
-
         binding.pokemonListFrame.pokemonList.apply {
             adapter = pokemonListAdapter
             val gridLayoutManager = GridLayoutManager(context, 3)
