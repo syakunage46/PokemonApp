@@ -19,8 +19,6 @@ import javax.inject.Inject
 
 class PokemonListFragment: DaggerFragment() {
 
-    lateinit var binding: FragmentPokemonListBinding
-
     @Inject
     lateinit var controller: PokemonListControllerInterface
 
@@ -35,7 +33,7 @@ class PokemonListFragment: DaggerFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = FragmentPokemonListBinding.inflate(inflater)
+        val binding = FragmentPokemonListBinding.inflate(inflater)
         binding.controller = controller
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -45,12 +43,12 @@ class PokemonListFragment: DaggerFragment() {
             Toast.makeText(context, R.string.fail_get_pokemon_list, Toast.LENGTH_SHORT).show()
         })
 
-        bindRecyclerView()
+        bindRecyclerView(binding)
         controller.onCreate()
         return binding.root
     }
 
-    private fun bindRecyclerView() {
+    private fun bindRecyclerView(binding: FragmentPokemonListBinding) {
         binding.pokemonListFrame.pokemonList.apply {
             adapter = pokemonListAdapter
             val gridLayoutManager = GridLayoutManager(context, 3)
