@@ -1,3 +1,4 @@
+include ':redux'
 include ':core'
 include ':appAdapter'
 include ':stateHolder'
