@@ -1,7 +1,7 @@
 package com.example.myapplication.di
 
 import com.example.core.pokemon.PokemonStateElement
-import com.example.myapplication.frameworks.StateListenerInterface
+import com.example.myapplication.frameworks.StateInputConnectorInterface
 import com.example.myapplication.interface_adapters.gateway.ElementStreet
 import com.example.myapplication.interface_adapters.gateway.StateJunctionInterface
 import dagger.Module
@@ -13,8 +13,8 @@ class StateJunctionModule {
 
     @Singleton
     @Provides
-    fun provideStateJunction(stateListener: StateListenerInterface): StateJunctionInterface
-            = stateListener.stateJunction
+    fun provideStateJunction(stateInputConnector: StateInputConnectorInterface): StateJunctionInterface
+            = stateInputConnector.stateJunction
 
     @Singleton
     @Provides

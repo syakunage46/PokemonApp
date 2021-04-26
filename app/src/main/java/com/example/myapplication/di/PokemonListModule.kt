@@ -1,7 +1,7 @@
 package com.example.myapplication.di
 
 import com.example.core.pokemon.PokemonStateElement
-import com.example.myapplication.frameworks.EventCasterInterface
+import com.example.myapplication.frameworks.EventOutputConnectorInterface
 import com.example.myapplication.interface_adapters.gateway.ElementStreet
 import com.example.myapplication.module.pokemonlist.PokemonListControllerInterface
 import com.example.myapplication.module.pokemonlist.PokemonListController
@@ -17,8 +17,8 @@ class PokemonListModule {
 
     @Singleton
     @Provides
-    fun providePokemonListController(eventCaster: EventCasterInterface): PokemonListControllerInterface
-            = PokemonListController(eventCaster)
+    fun providePokemonListController(eventOutputConnector: EventOutputConnectorInterface): PokemonListControllerInterface
+            = PokemonListController(eventOutputConnector)
 
     @Singleton
     @Provides
