@@ -4,25 +4,27 @@ import android.app.Application
 import com.example.appadapter.di.DaggerAppAdapterGatewayComponent
 import com.example.core.event.Event
 import com.example.core.state.State
+import com.example.redux.ReduxGatewayInterface
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface AppAdapterGatewayInterface {
     val stateFlow: Flow<State>
+    fun send(event: Event)
 }
 
-class AppAdapterGateway @Inject constructor(
-    override val stateFlow: Flow<State>
-) : AppAdapterGatewayInterface {
-    companion object {
-        @Volatile
-        private var instance: AppAdapterGatewayInterface? = null
+class AppAdapterGateway : AppAdapterGatewayInterface {
+    @Inject
+    lateinit var reduxGateway: ReduxGatewayInterface
 
-        private fun create(app: Application, eventFlow: Flow<Event>): AppAdapterGatewayInterface {
-            return DaggerAppAdapterGatewayComponent.factory().create(app, eventFlow).appAdapterGateway()
-        }
+    override lateinit var stateFlow: Flow<State>
 
-        fun getInstance(app: Application, eventFlow: Flow<Event>): AppAdapterGatewayInterface =
-            (instance ?: create(app, eventFlow)).also { instance = it }
+    init {
+        DaggerAppAdapterGatewayComponent.builder().build().inject(this)
+        stateFlow = reduxGateway.stateFlow
+    }
+
+    override fun send(event: Event) {
+        reduxGateway.eventInputConnector.pass(event)
     }
 }

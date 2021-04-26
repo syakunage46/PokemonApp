@@ -13,7 +13,5 @@ import javax.inject.Singleton
 class AppAdapterModule {
     @Singleton
     @Provides
-    fun provideAppAdapter(app: Application, eventFlow: NonWildcardFlow<Event>): AppAdapterGatewayInterface
-            = AppAdapterGateway.getInstance(app, eventFlow)
-
+    fun provideAppAdapter(): AppAdapterGatewayInterface = AppAdapterGateway()
 }

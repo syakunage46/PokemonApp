@@ -15,12 +15,9 @@ import javax.inject.Singleton
 class FrameworksModule{
     @Singleton
     @Provides
-    fun provideEventCaster(): EventOutputConnectorInterface
-            = EventOutputConnector()
-    @Singleton
-    @Provides
-    fun provideEventFLow(eventOutputConnector: EventOutputConnectorInterface): NonWildcardFlow<Event>
-            = eventOutputConnector.eventFLow
+    fun provideEventCaster(appAdapter: AppAdapterGatewayInterface): EventOutputConnectorInterface
+            = EventOutputConnector(appAdapter)
+
     @Singleton
     @Provides
     fun provideStateListener(appAdapter: AppAdapterGatewayInterface): StateInputConnectorInterface
