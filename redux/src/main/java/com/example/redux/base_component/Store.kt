@@ -9,7 +9,7 @@ interface StoreInterface {
     fun dispatch(action: Action)
 }
 
-class Store(private val reducerInterface: ReducerInterface): StoreInterface {
+class Store(private val reducerBus: ReducerBusInterface): StoreInterface {
     private val _stateFlow = MutableStateFlow(State(emptyMap()))
     override val stateFlow = _stateFlow
 

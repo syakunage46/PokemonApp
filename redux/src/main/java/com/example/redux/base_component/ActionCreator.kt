@@ -6,7 +6,7 @@ interface ActionCreatorInterface {
     fun post(event: Event)
 }
 
-class ActionCreator(private val actionAdapter: ActionAdapterInterface,
+class ActionCreator<ActionType: Action>(private val actionAdapter: ActionAdapterInterface<ActionType>,
                     private val dispatcher: DispatcherInterface)
     : ActionCreatorInterface {
 
