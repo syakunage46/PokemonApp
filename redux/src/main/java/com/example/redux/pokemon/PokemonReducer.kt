@@ -4,6 +4,7 @@ import com.example.core.pokemon.PokemonStateElement
 import com.example.core.state.State
 import com.example.redux.base_component.Action
 import com.example.redux.base_component.ElementReducerInterface
+import com.example.redux.middleware.ThunkStart
 
 class PokemonReducer: ElementReducerInterface<PokemonStateElement> {
     override fun reduce(state: State, action: Action): PokemonStateElement {
