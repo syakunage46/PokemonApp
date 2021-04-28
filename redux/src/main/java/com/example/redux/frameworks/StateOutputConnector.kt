@@ -9,5 +9,5 @@ interface StateOutputConnectorInterface {
 }
 
 class StateOutputConnector(store: StoreInterface): StateOutputConnectorInterface {
-    override val stateFlow = store.state
+    override val stateFlow = store.stateFlow
 }
