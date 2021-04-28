@@ -21,7 +21,7 @@ class StateBuilder(val mutableStateElement: MutableStateElements){
     inline fun<reified T: StateElement> prevOrDefault(default: T): T
         = mutableStateElement[T::class] as? T ?: default
 
-    inline fun <reified T : StateElement> element(element: T) {
-        mutableStateElement[T::class] = element
+    fun <T : StateElement> element(element: T) {
+        mutableStateElement[element::class] = element
     }
 }
