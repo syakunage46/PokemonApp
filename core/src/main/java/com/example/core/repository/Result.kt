@@ -13,6 +13,6 @@ sealed class Result<out T> {
     fun onSuccess(fn: (success: T) -> Unit): Result<T> =
         this.also { if (it is Result.Success) fn(it.data) }
 
-    fun onFailure(fn: (failure: java.lang.Exception) -> Unit): Result<T> =
+    fun onFailure(fn: (failure: Exception) -> Unit): Result<T> =
         this.also { if (it is Result.Failure) fn(it.exception) }
 }
