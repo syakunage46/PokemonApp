@@ -1,16 +1,17 @@
 package com.example.appadapter.repository
 
 import com.example.core.repository.Repository
-import com.example.core.repository.RepositoryQuery
+import com.example.core.repository.RepositoryParcel
 import com.example.core.repository.Result
+import java.lang.Exception
 import kotlin.reflect.KClass
 
-interface RepositoryBusInterface
+typealias Repositories = Map<KClass<out RepositoryParcel<*>>, Repository>
 
-typealias Repositories = Map<KClass<out Repository<*>>, Repository<*>>
+class RepositoryBus(val repositoryList: Repositories): Repository() {
+    inline operator fun<reified Key: RepositoryParcel<*>> get(key: KClass<Key>):Key? = repositoryList[key] as? Key
 
-class RepositoryBus(private val repositoryList: List<Repository<*>>): RepositoryBusInterface {
-    suspend fun <T> fetch(query: RepositoryQuery): Result<T> {
-        repositoryList.first { it is Repository<query::class > }
+    internal override suspend fun<T> handle(parcel: RepositoryParcel<T>): Result<*>? {
+        return repositoryList[parcel::class]?.fetch(parcel) ?: Result.Failure(Exception("${parcel}を扱うRepositoryがRepositoryBusに登録されていません"))
     }
 }
