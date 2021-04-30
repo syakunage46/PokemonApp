@@ -1,10 +1,7 @@
 package com.example.pokemonrepository.usecase
 
-import android.util.Log
 import com.example.pokemonrepository.data.PokemonRepositoryItem
 import com.example.pokemonrepository.repository.datasource.PokemonDataSource
-import com.example.pokemonrepository.repository.datasource.local.PokemonLocalDataSource
-import com.example.pokemonrepository.repository.datasource.remote.PokemonRemoteDataSource
 
 interface GetPokemonList {
     suspend operator fun invoke(limit: Int, offset: Int): List<PokemonRepositoryItem>
