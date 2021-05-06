@@ -1,16 +1,16 @@
 package com.example.appadapter.repository
 
 import com.example.core.repository.Repository
-import com.example.core.repository.RepositoryQuery
-import com.example.core.repository.Result
+import com.example.core.repository.RepositoryRequest
+import com.example.core.repository.Response
+import kotlinx.coroutines.runBlocking
 import kotlin.reflect.KClass
 
-interface RepositoryBusInterface
+typealias Repositories = Map<KClass<out RepositoryRequest<*>>, Repository>
 
-typealias Repositories = Map<KClass<out Repository<*>>, Repository<*>>
-
-class RepositoryBus(private val repositoryList: List<Repository<*>>): RepositoryBusInterface {
-    suspend fun <T> fetch(query: RepositoryQuery): Result<T> {
-        repositoryList.first { it is Repository<query::class > }
+class RepositoryBus(private val repositoryList: Repositories): Repository() {
+    override suspend fun<T, R: RepositoryRequest<T>> handle(request: R){
+        val response = repositoryList[request::class]?.fetch(request) ?: Response.Failure(Exception("${request::class.simpleName}に対応するRepositoryが${this::class.simpleName}に登録されていません。"))
+        request.response(response)
     }
 }
