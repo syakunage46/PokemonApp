@@ -6,7 +6,7 @@ import com.example.core.repository.Response
 import kotlinx.coroutines.runBlocking
 import kotlin.reflect.KClass
 
-typealias Repositories = Map<KClass<out RepositoryRequest<*>>, Repository>
+typealias Repositories = Map<@JvmSuppressWildcards KClass<out @JvmSuppressWildcards RepositoryRequest<*>>, @JvmSuppressWildcards Repository>
 
 class RepositoryBus(private val repositories: Repositories): Repository() {
     override suspend fun<T, R: RepositoryRequest<T>> handle(request: R){

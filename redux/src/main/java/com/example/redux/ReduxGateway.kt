@@ -21,10 +21,13 @@ interface ReduxGatewayInterface {
 class ReduxGateway(repository: Repository, eventConverterBus: EventConverterInterface) : ReduxGatewayInterface {
     @Inject lateinit var stateOutputConnector: StateOutputConnectorInterface
     @Inject lateinit var actionCreator: ActionCreatorInterface
-    override val stateFlow: Flow<State> = stateOutputConnector.stateFlow
-    override val eventInputConnector: EventInputConnectorInterface = EventInputConnector(actionCreator)
+    override val stateFlow: Flow<State>
+    override val eventInputConnector: EventInputConnectorInterface
 
     init {
         DaggerReduxComponent.factory().create(RepositoryModule(repository), EventConverterModule(eventConverterBus)).inject(this)
+        stateFlow = stateOutputConnector.stateFlow
+        eventInputConnector = EventInputConnector(actionCreator)
     }
+
 }
