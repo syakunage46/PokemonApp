@@ -1,13 +1,15 @@
 package com.example.redux.frameworks
 
 import com.example.core.event.Event
+import com.example.redux.base_component.ActionCreator
+import com.example.redux.base_component.ActionCreatorInterface
 
 interface EventInputConnectorInterface {
     fun pass(event: Event)
 }
 
-class EventInputConnector: EventInputConnectorInterface {
+class EventInputConnector(val actionCreator: ActionCreatorInterface): EventInputConnectorInterface {
     override fun pass(event: Event) {
-        println("EventInputConnector $event")
+        actionCreator.post(event)
     }
 }

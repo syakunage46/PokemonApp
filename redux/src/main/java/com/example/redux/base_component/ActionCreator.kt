@@ -6,12 +6,12 @@ interface ActionCreatorInterface {
     fun post(event: Event)
 }
 
-class ActionCreator(private val actionAdapter: ActionAdapterInterface,
+class ActionCreator(private val eventConverter: EventConverterInterface,
                     private val dispatcher: DispatcherInterface)
     : ActionCreatorInterface {
 
     override fun post(event: Event) {
-        val action = actionAdapter.convert(event)
+        val action = eventConverter.convert(event)
         dispatcher.dispatch(action)
     }
 }

@@ -14,7 +14,7 @@ class RepositoryBusModule {
 
     @Singleton
     @Provides
-    fun provideRepositoryBus(): Repository = RepositoryBus(provideRepositories)
+    fun provideRepositoryBus(): Repository = RepositoryBus(repositories)
 
-    private val provideRepositories: Repositories = emptyMap()
+    private val repositories: Repositories = emptyMap()
 }

@@ -2,14 +2,13 @@ package com.example.appadapter.di
 
 import android.app.Application
 import com.example.appadapter.AppAdapterGateway
-import com.example.core.event.Event
-import com.example.stateholder.di.StateGatewayComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
+    EventConverterBusModule::class,
     ReduxModule::class,
     RepositoryBusModule::class
 ])
