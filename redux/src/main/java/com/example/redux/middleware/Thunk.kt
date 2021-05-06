@@ -21,7 +21,8 @@ class Thunk(private val repository: Repository, private val coroutineDispatcher:
     override fun behavior(store: StoreInterface, next: ReduxMiddlewareNext, action: Action): Action {
         val result = if (action is ThunkAction) next(action.start()) else return next(action)
         scope.launch {
-            next(action(store, repository))
+            // TODO: MiddlewareにDispatcherとStateを渡すようにすればいいと思う
+            store.dispatch(action(store, repository))s
         }
         return next(result)
     }

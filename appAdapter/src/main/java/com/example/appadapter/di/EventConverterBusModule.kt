@@ -18,7 +18,11 @@ class EventConverterBusModule {
     @Provides
     fun provideEventConverterBus(): EventConverterInterface = EventConverterBus(eventConverters)
 
+    //TODO: 綺麗にしたい　EventGroupとか？
     private val eventConverters: EventConverters = mapOf(
-        PokemonEvent::class to PokemonEventConverter()
+        PokemonEvent.OnCreate::class to PokemonEventConverter(),
+        PokemonEvent.OnSwipeRefresh::class to PokemonEventConverter(),
+        PokemonEvent.OnScrolledToEnd::class to PokemonEventConverter(),
+        PokemonEvent.OnError::class to PokemonEventConverter()
     )
 }
