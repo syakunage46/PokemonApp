@@ -1,5 +1,6 @@
 package com.example.appadapter.di
 
+import com.example.core.repository.Repository
 import com.example.redux.ReduxGateway
 import com.example.redux.ReduxGatewayInterface
 import dagger.Module
@@ -10,5 +11,5 @@ import javax.inject.Singleton
 class ReduxModule {
     @Singleton
     @Provides
-    fun provideReduxGateway(): ReduxGatewayInterface = ReduxGateway()
+    fun provideReduxGateway(repositoryBus: Repository): ReduxGatewayInterface = ReduxGateway(repositoryBus)
 }

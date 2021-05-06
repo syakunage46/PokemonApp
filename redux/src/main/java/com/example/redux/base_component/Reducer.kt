@@ -8,7 +8,9 @@ interface ReducerInterface {
     fun reduce(state: State, action: Action): State
 }
 
-class Reducer(private val elementReducers: List<ElementReducerInterface<*>>): ReducerInterface {
+typealias ElementReducers = List<ElementReducerInterface<*>>
+
+class Reducer(private val elementReducers: ElementReducers): ReducerInterface {
     override fun reduce(state: State, action: Action): State {
         return state.shift {
             elementReducers.forEach { elementReducer ->

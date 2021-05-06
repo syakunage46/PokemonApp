@@ -13,14 +13,14 @@ interface AppAdapterGatewayInterface {
     fun send(event: Event)
 }
 
-class AppAdapterGateway : AppAdapterGatewayInterface {
+class AppAdapterGateway(app: Application) : AppAdapterGatewayInterface {
     @Inject
     lateinit var reduxGateway: ReduxGatewayInterface
 
     override lateinit var stateFlow: Flow<State>
 
     init {
-        DaggerAppAdapterGatewayComponent.builder().build().inject(this)
+        DaggerAppAdapterGatewayComponent.factory().create(app).inject(this)
         stateFlow = reduxGateway.stateFlow
     }
 

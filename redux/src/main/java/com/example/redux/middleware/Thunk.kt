@@ -1,5 +1,6 @@
 package com.example.redux.middleware
 
+import com.example.core.repository.Repository
 import com.example.redux.base_component.Action
 import com.example.redux.base_component.StoreInterface
 import com.example.redux.frameworks.RepositoryManager
@@ -7,10 +8,10 @@ import kotlinx.coroutines.*
 
 interface ThunkAction: Action {
     fun start(): Action
-    suspend operator fun invoke(store: StoreInterface, repositoryManager: RepositoryManager): Action
+    suspend operator fun invoke(store: StoreInterface, repository: Repository): Action
 }
 
-class Thunk(private val repositoryManager: RepositoryManager, private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default): ReduxMiddleware {
+class Thunk(private val repository: Repository, private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default): ReduxMiddleware {
     private val exceptionHandler: CoroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
         throw throwable
     }
@@ -20,7 +21,7 @@ class Thunk(private val repositoryManager: RepositoryManager, private val corout
     override fun behavior(store: StoreInterface, next: ReduxMiddlewareNext, action: Action): Action {
         val result = if (action is ThunkAction) next(action.start()) else return next(action)
         scope.launch {
-            next(action(store, repositoryManager))
+            next(action(store, repository))
         }
         return next(result)
     }

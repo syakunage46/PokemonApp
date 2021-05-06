@@ -8,9 +8,9 @@ import kotlin.reflect.KClass
 
 typealias Repositories = Map<KClass<out RepositoryRequest<*>>, Repository>
 
-class RepositoryBus(private val repositoryList: Repositories): Repository() {
+class RepositoryBus(private val repositories: Repositories): Repository() {
     override suspend fun<T, R: RepositoryRequest<T>> handle(request: R){
-        val response = repositoryList[request::class]?.fetch(request) ?: Response.Failure(Exception("${request::class.simpleName}に対応するRepositoryが${this::class.simpleName}に登録されていません。"))
+        val response = repositories[request::class]?.fetch(request) ?: Response.Failure(Exception("${request::class.simpleName}に対応するRepositoryが${this::class.simpleName}に登録されていません。"))
         request.response(response)
     }
 }
