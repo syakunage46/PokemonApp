@@ -1,5 +1,6 @@
 package com.example.myapplication.di
 
+import com.example.core.navigation.NavigationStateElement
 import com.example.core.pokemon.PokemonStateElement
 import com.example.myapplication.frameworks.StateInputConnectorInterface
 import com.example.myapplication.interface_adapters.gateway.ElementStreet
@@ -20,4 +21,9 @@ class StateJunctionModule {
     @Provides
     fun providePokemonStreet(stateJunction: StateJunctionInterface): ElementStreet<PokemonStateElement>
             = stateJunction.pokemonStreet
+
+    @Singleton
+    @Provides
+    fun provideNavigationStreet(stateJunction: StateJunctionInterface): ElementStreet<NavigationStateElement>
+            = stateJunction.navigationStreet
 }

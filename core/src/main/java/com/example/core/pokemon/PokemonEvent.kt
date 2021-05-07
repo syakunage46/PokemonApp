@@ -4,7 +4,8 @@ import com.example.core.event.Event
 
 interface PokemonEvent: Event {
     class OnCreate: PokemonEvent
-    class OnSwipeRefresh : PokemonEvent
-    class OnScrolledToEnd(val offset: Int) : PokemonEvent
+    class OnSwipeRefresh: PokemonEvent
+    class OnScrolledToEnd(val offset: Int): PokemonEvent
+    class OnTapToPokemonItem(val id: Long): PokemonEvent
     class OnError(val throwable: Throwable): PokemonEvent
 }

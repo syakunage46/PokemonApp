@@ -15,6 +15,7 @@ import javax.inject.Singleton
         ApplicationModule::class,
         FrameworksModule::class,
         MainActivityModule::class,
+        NavigationModule::class,
         PokemonListFragmentModule::class,
         PokemonListModule::class,
         StateJunctionModule::class]

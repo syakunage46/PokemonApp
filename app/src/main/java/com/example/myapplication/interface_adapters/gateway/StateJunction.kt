@@ -1,5 +1,6 @@
 package com.example.myapplication.interface_adapters.gateway
 
+import com.example.core.navigation.NavigationStateElement
 import com.example.core.pokemon.PokemonStateElement
 import com.example.core.state.State
 import com.example.core.state.StateElement
@@ -8,10 +9,13 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
 
 interface StateJunctionInterface {
+    val navigationStreet: ElementStreet<NavigationStateElement>
     val pokemonStreet: ElementStreet<PokemonStateElement>
 }
 
 class StateJunction(stateFlow: Flow<State>): StateJunctionInterface {
+    override val navigationStreet: ElementStreet<NavigationStateElement>
+            = ElementStreet(stateFlow.mapNotNull { it[NavigationStateElement::class] })
     override val pokemonStreet: ElementStreet<PokemonStateElement>
             = ElementStreet(stateFlow.mapNotNull { it[PokemonStateElement::class] })
 }

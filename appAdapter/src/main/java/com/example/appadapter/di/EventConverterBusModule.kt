@@ -23,6 +23,7 @@ class EventConverterBusModule {
         PokemonEvent.OnCreate::class to PokemonEventConverter(),
         PokemonEvent.OnSwipeRefresh::class to PokemonEventConverter(),
         PokemonEvent.OnScrolledToEnd::class to PokemonEventConverter(),
-        PokemonEvent.OnError::class to PokemonEventConverter()
+        PokemonEvent.OnTapToPokemonItem::class to PokemonEventConverter(),
+        PokemonEvent.OnError::class to PokemonEventConverter(),
     )
 }

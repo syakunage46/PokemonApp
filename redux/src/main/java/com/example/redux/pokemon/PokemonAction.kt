@@ -15,6 +15,7 @@ interface PokemonAction: Action {
     class AddList(val payload: List<PokemonData>): PokemonAction
     class InLoading: PokemonAction
     class Failed(val payload: Throwable): PokemonAction
+    class ShowDetail(val id: Long): PokemonAction
 
     class FetchList(private val limit: Int, private val offset: Int, private val event: Event): PokemonAction, ThunkAction {
         override fun start() = InLoading()

@@ -49,6 +49,7 @@ class PokemonListFragment: DaggerFragment() {
     }
 
     private fun bindRecyclerView(binding: FragmentPokemonListBinding) {
+        pokemonListAdapter.setOnTapItemCallBack { controller.onTapToPokemonItem(it.id) }
         binding.pokemonListFrame.pokemonList.apply {
             adapter = pokemonListAdapter
             val gridLayoutManager = GridLayoutManager(context, 3)

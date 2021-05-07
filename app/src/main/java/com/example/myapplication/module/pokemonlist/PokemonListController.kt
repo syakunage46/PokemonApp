@@ -7,6 +7,7 @@ import com.example.myapplication.frameworks.EventOutputConnectorInterface
 interface PokemonListControllerInterface: SwipeRefreshDelegate {
     fun onCreate()
     fun onScrolledToEnd(offset: Int)
+    fun onTapToPokemonItem(id: Long)
 }
 
 class PokemonListController(private val eventOutputConnector: EventOutputConnectorInterface): PokemonListControllerInterface {
@@ -16,6 +17,10 @@ class PokemonListController(private val eventOutputConnector: EventOutputConnect
 
     override fun onScrolledToEnd(offset: Int) {
         eventOutputConnector.send(PokemonEvent.OnScrolledToEnd(offset))
+    }
+
+    override fun onTapToPokemonItem(id: Long) {
+        eventOutputConnector.send(PokemonEvent.OnTapToPokemonItem(id))
     }
 
     override fun onSwipeRefresh() {

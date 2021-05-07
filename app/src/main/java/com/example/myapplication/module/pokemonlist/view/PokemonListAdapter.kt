@@ -7,17 +7,26 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.pokemon.PokemonData
+import com.example.core.pokemon.PokemonEvent
 import com.example.myapplication.databinding.PokemonListItemBinding
 
 class PokemonListAdapter: ListAdapter<PokemonData, PokemonListAdapter.PokemonListViewHolder>(PokemonDataDiffCallback()){
+
+    private var onTapItem: (PokemonData) -> Unit = {}
+
+    fun setOnTapItemCallBack(onTapItem: (PokemonData) -> Unit){
+        this.onTapItem = onTapItem
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PokemonListViewHolder.from(parent)
 
-    override fun onBindViewHolder(holder: PokemonListViewHolder, position: Int) = holder.bind(getItem(position))
+    override fun onBindViewHolder(holder: PokemonListViewHolder, position: Int) = holder.bind(getItem(position), onTapItem)
 
     class PokemonListViewHolder(private val binding: PokemonListItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: PokemonData) {
+        fun bind(item: PokemonData, onTapItem: (PokemonData) -> Unit) {
             binding.pokemonData = item
+            binding.root.setOnClickListener { onTapItem(item) }
             binding.executePendingBindings()
         }
 
