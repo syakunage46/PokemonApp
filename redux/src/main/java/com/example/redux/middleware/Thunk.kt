@@ -22,7 +22,7 @@ class Thunk(private val repository: Repository, private val coroutineDispatcher:
         val result = if (action is ThunkAction) next(action.start()) else return next(action)
         scope.launch {
             // TODO: MiddlewareにDispatcherとStateを渡すようにすればいいと思う
-            store.dispatch(action(store, repository))s
+            store.dispatch(action(store, repository))
         }
         return next(result)
     }

@@ -19,6 +19,6 @@ class PokemonEventConverter: PokemonEventConverterInterface {
     }
 
     companion object {
-        const val REQUEST_ITEM_COUNT = 15
+        const val REQUEST_ITEM_COUNT = 20
     }
 }
