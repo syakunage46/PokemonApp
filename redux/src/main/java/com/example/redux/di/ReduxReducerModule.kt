@@ -11,10 +11,5 @@ import javax.inject.Singleton
 class ReduxReducerModule {
     @Singleton
     @Provides
-    fun provideReducer(): ReducerInterface = Reducer(elementReducers)
-
-    private val elementReducers: ElementReducers = listOf(
-        PokemonReducer(),
-        NavigationReducer()
-    )
+    fun provideReducer(): ReducerInterface = Reducer(ReducerHelper.elementReducers)
 }

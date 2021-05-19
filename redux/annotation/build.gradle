@@ -1,0 +1,22 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+    id 'kotlin-kapt'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    implementation project(':core')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Annotation
+    implementation "com.squareup:kotlinpoet:$kotlinpoet_version"
+    implementation "com.google.auto:auto-common:$auto_common_version"
+    implementation "com.google.auto.service:auto-service:$auto_service_version"
+
+    kapt "com.google.auto.service:auto-service:$auto_service_version"
+}
